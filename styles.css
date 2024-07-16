@@ -246,3 +246,32 @@ ul li .descr::before {
 .credits a {
   color: var(--color);
 }
+
+.hi { font-size: 20px; }
+.my { font-size: 30px; }
+.name { font-size: 40px; }
+.is { font-size: 50px; }
+.nad { font-size: 60px; }
+
+.introcontainer {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.text {
+    display: inline-block;
+    text-align: right;
+}
+.text p {
+    margin: 0;
+}
+.image {
+    display: inline-block;
+    margin-left: 20px;
+}
+.image img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
