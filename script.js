@@ -123,12 +123,26 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Intersection observer for fade-in effect
 const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.navbar a');
+const navbar = document.querySelector('.navbar');
+const summarySection = document.querySelector('#summary');
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('active');
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+      });
+
+            // Change navbar background opacity when at top or in summary section
+            if (entry.target.id === "summary") {
+              navbar.classList.add('transparent');
+            } else {
+              navbar.classList.remove('transparent');
+            }
     }
+    console.log(window.scrollY)
   });
 }, {
   threshold: 0.1
@@ -136,4 +150,32 @@ const observer = new IntersectionObserver(entries => {
 
 sections.forEach(section => {
   observer.observe(section);
+});
+
+
+// Initial check to set navbar transparency
+if (window.scrollY === 0) {
+  console.log(window.scrollY)
+  navbar.classList.add('transparent');
+}
+
+
+window.addEventListener('scroll', function() {
+  const scrollValue = window.scrollY; // Get the number of pixels the document is currently scrolled vertically.
+  // const content = document.querySelector('.content');
+  
+  // Adjust this value to set the scroll threshold for changing opacity
+  const maxScroll = 100;
+  if(maxScroll>scrollValue){
+    navbar.classList.add('transparent');
+  }else{
+    navbar.classList.remove('transparent');
+  }
+  // // Calculate the new opacity
+  // const newOpacity = 1 - (scrollValue / maxScroll);
+
+  // // Set the new opacity
+  // if (newOpacity >= 0) {
+  //     content.style.opacity = newOpacity;
+  // }
 });
