@@ -142,7 +142,6 @@ const observer = new IntersectionObserver(entries => {
               navbar.classList.remove('transparent');
             }
     }
-    console.log(window.scrollY)
   });
 }, {
   threshold: 0.1
