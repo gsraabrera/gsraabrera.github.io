@@ -1,179 +1,776 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ronald Abrera Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Senior Software Engineer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#0f172a', // Slate 900
+              secondary: '#334155', // Slate 700
+              accent: '#3b82f6', // Blue 500
+              background: '#f8fafc', // Slate 50
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Custom scrollbar for webkit */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+      .fade-in {
+        animation: fadeIn 0.5s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      /* Chatbot transition classes */
+      .chat-window {
+        transition: all 0.3s ease-in-out;
+        transform-origin: bottom right;
+      }
+      .chat-window.hidden-chat {
+        opacity: 0;
+        transform: scale(0.9);
+        pointer-events: none;
+      }
+      .chat-window.visible-chat {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+      }
+    </style>
+    <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.32.0",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.557.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
 </head>
-<body>
-  <div id="particles-js"></div>
-  <div class="navbar transparent">
-    <a href="#summary">Summary</a>
-    <a href="#skills">Skills</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact Me</a>
+<body class="bg-background text-slate-800 antialiased">
+
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center">
+            <svg class="h-8 w-8 text-accent" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 7 5 5-5 5"/><path d="m19 17-5-5 5-5"/></svg>
+            <span class="ml-2 text-xl font-bold text-slate-800 tracking-tight">Ronald Abrera</span>
+          </div>
+          
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-8">
+              <a href="#summary" class="text-slate-600 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Summary</a>
+              <a href="#skills" class="text-slate-600 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Skills</a>
+              <a href="#projects" class="text-slate-600 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Projects</a>
+              <a href="#contact" class="text-slate-600 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Contact</a>
+            </div>
+          </div>
+          
+          <div class="-mr-2 flex md:hidden">
+            <button id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-accent focus:outline-none">
+              <svg id="menu-icon" class="h-6 w-6 block" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+              <svg id="close-icon" class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <a href="#summary" class="text-slate-600 hover:text-accent block px-3 py-2 rounded-md text-base font-medium">Summary</a>
+          <a href="#skills" class="text-slate-600 hover:text-accent block px-3 py-2 rounded-md text-base font-medium">Skills</a>
+          <a href="#projects" class="text-slate-600 hover:text-accent block px-3 py-2 rounded-md text-base font-medium">Projects</a>
+          <a href="#contact" class="text-slate-600 hover:text-accent block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+        <section id="summary" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-gradient-to-br from-slate-50 to-slate-100 overflow-hidden">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center">
+                <div class="inline-flex items-center justify-center p-2 bg-blue-50 rounded-full mb-6">
+                    <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>
+                    <span class="text-accent text-sm font-semibold tracking-wide uppercase">Senior Software Engineer & Tech Lead</span>
+                </div>
+              <h1 class="text-4xl tracking-tight font-extrabold text-slate-900 sm:text-5xl md:text-6xl lg:text-7xl mb-6">
+                Developing Scalable <br class="hidden sm:block" />
+                <span class="text-accent">Institutional Systems</span>
+              </h1>
+              <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-600 mb-10 leading-relaxed">
+                A results-oriented Senior Software Engineer with over 10 years of experience managing the full Software Development Lifecycle (SDLC). Specialized in architecting and deploying large-scale, mission-critical administrative and educational systems. Experienced in agile environments, mentoring development teams, and driving efficiency through strategic digital solutions.
+              </p>
+              <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
+                <div class="rounded-md shadow">
+                  <a href="#projects" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-accent hover:bg-blue-600 md:py-4 md:text-lg transition-all duration-300 shadow-lg hover:shadow-blue-500/30">
+                    View Projects
+                  </a>
+                </div>
+                <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+                  <a href="#contact" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-accent bg-white hover:bg-slate-50 md:py-4 md:text-lg border-slate-200">
+                    Contact Me
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-20 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
+                    <div class="h-2 w-12 bg-accent rounded-full mb-4"></div>
+                    <p class="text-slate-700 font-medium">10+ Years in Software Engineering</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
+                    <div class="h-2 w-12 bg-accent rounded-full mb-4"></div>
+                    <p class="text-slate-700 font-medium">Expertise in Large-Scale Institutional Systems</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
+                    <div class="h-2 w-12 bg-accent rounded-full mb-4"></div>
+                    <p class="text-slate-700 font-medium">Agile Methodology (Scrum/Kanban) Leadership</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
+                    <div class="h-2 w-12 bg-accent rounded-full mb-4"></div>
+                    <p class="text-slate-700 font-medium">Full-stack Architecture & Optimization</p>
+                </div>
+            </div>
+          </div>
+          
+          <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-[800px] bg-gradient-to-b from-blue-50/50 to-transparent rounded-[100%] pointer-events-none -z-0"></div>
+        </section>
+
+        <section id="skills" class="py-24 bg-white">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+              <h2 class="text-base text-accent font-semibold tracking-wide uppercase">Technical Expertise</h2>
+              <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                Full-Stack Proficiency
+              </p>
+              <p class="mt-4 max-w-2xl text-xl text-slate-500 mx-auto">
+                A versatile MERN/LAMP stack background with deep specialization in cloud infrastructure and database architecture.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
+              <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center mb-6">
+                  <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-lg bg-primary text-white">
+                      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>
+                  </div>
+                  <h3 class="ml-4 text-xl font-bold text-slate-900">Backend & Architecture</h3>
+                </div>
+                <ul class="space-y-4">
+                  <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             PHP (Laravel, CodeIgniter)
+                        </span>
+                        <span class="text-slate-400 text-sm">95%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 95%"></div>
+                    </div>
+                  </li>
+                  <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             Node.js (Express, NestJS)
+                        </span>
+                        <span class="text-slate-400 text-sm">75%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 75%"></div>
+                    </div>
+                  </li>
+                  <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             .NET Core / C#
+                        </span>
+                        <span class="text-slate-400 text-sm">75%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 75%"></div>
+                    </div>
+                  </li>
+                   <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             RESTful API Design
+                        </span>
+                        <span class="text-slate-400 text-sm">95%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 95%"></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center mb-6">
+                  <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-lg bg-primary text-white">
+                      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="21" y2="9"/></svg>
+                  </div>
+                  <h3 class="ml-4 text-xl font-bold text-slate-900">Frontend Development</h3>
+                </div>
+                <ul class="space-y-4">
+                  <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             React.js / Next.js
+                        </span>
+                        <span class="text-slate-400 text-sm">75%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 75%"></div>
+                    </div>
+                  </li>
+                  <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             Vue.js / Nuxt.js
+                        </span>
+                        <span class="text-slate-400 text-sm">90%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 90%"></div>
+                    </div>
+                  </li>
+                  <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             JavaScript / TypeScript
+                        </span>
+                        <span class="text-slate-400 text-sm">95%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 95%"></div>
+                    </div>
+                  </li>
+                  <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             WordPress
+                        </span>
+                        <span class="text-slate-400 text-sm">85%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 85%"></div>
+                    </div>
+                  </li>
+                  <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             Elementor
+                        </span>
+                        <span class="text-slate-400 text-sm">80%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                  </li>
+                  <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             Divi
+                        </span>
+                        <span class="text-slate-400 text-sm">80%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                  </li>
+                  <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                            <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                            Flutter
+                        </span>
+                        <span class="text-slate-400 text-sm">75%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 75%"></div>
+                    </div>
+                </li>
+                <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                            <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                            Capacitor
+                        </span>
+                        <span class="text-slate-400 text-sm">80%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                </li>
+                  <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             Tailwind CSS
+                        </span>
+                        <span class="text-slate-400 text-sm">90%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 90%"></div>
+                    </div>
+                  </li>
+                   <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             Vuetify (UI Framework)
+                        </span>
+                        <span class="text-slate-400 text-sm">80%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center mb-6">
+                  <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-lg bg-primary text-white">
+                      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s 9-1.34 9-3V5"/></svg>
+                  </div>
+                  <h3 class="ml-4 text-xl font-bold text-slate-900">Database, Cloud & DevOps</h3>
+                </div>
+                <ul class="space-y-4">
+                  <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             SQL (MySQL, MSSQL, MariaDB, PostgreSQL)
+                        </span>
+                        <span class="text-slate-400 text-sm">95%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 95%"></div>
+                    </div>
+                  </li>
+                  <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             AWS (EC2, S3, RDS)
+                        </span>
+                        <span class="text-slate-400 text-sm">80%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                  </li>
+                   <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             DevOps (CI/CD, Docker, Git)
+                        </span>
+                        <span class="text-slate-400 text-sm">75%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 75%"></div>
+                    </div>
+                  </li>
+                   <li class="flex flex-col">
+                    <div class="flex justify-between mb-1">
+                        <span class="text-slate-700 font-medium flex items-center">
+                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                             Automation Testing (Cypress, Jest)
+                        </span>
+                        <span class="text-slate-400 text-sm">80%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2">
+                        <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="projects" class="py-24 bg-slate-50">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 md:flex md:items-center md:justify-between">
+                <div class="mb-8 md:mb-0">
+                    <h2 class="text-base text-accent font-semibold tracking-wide uppercase">Portfolio</h2>
+                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                        Selected Works
+                    </p>
+                </div>
+                
+                <div class="flex flex-wrap gap-2" id="project-filters">
+                    <button data-filter="All" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-primary text-white shadow-md border border-slate-200">All</button>
+                    <button data-filter="Academic/Administrative Management" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-white text-slate-600 hover:bg-slate-200 border border-slate-200">Academic/Administrative Management</button>
+                    <button data-filter="Digital Workflow & Tracking" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-white text-slate-600 hover:bg-slate-200 border border-slate-200">Digital Workflow & Tracking</button>
+                    <button data-filter="Web Design & CMS" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-white text-slate-600 hover:bg-slate-200 border border-slate-200">Web Design & CMS</button>
+                    <button data-filter="Specialized Institutional Tools" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-white text-slate-600 hover:bg-slate-200 border border-slate-200">Specialized Institutional Tools</button>
+                </div>
+            </div>
     
-  </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+              
+              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Academic/Administrative Management">
+                <div class="p-6 flex-1 flex flex-col">
+                  <div class="flex items-start justify-between mb-4">
+                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
+                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 13v6"/><path d="M9 16l3 3 3-3"/></svg>
+                      </div>
+                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Academic/Administrative</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">Academic Management Information System (AMIS)</h3>
+                  <p class="text-slate-600 text-sm mb-6 flex-1">A comprehensive system managing student records, enrollment, and grading for university-wide operations. **Successfully migrated 5+ years of legacy data, supporting over 15,000 active users.**</p>
+                  <div class="mt-auto">
+                      <div class="flex flex-wrap gap-2 mb-4">
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PHP</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Laravel</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PostgreSQL</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Nuxt.js</span>
+                      </div>
+                  </div>
+                </div>
+              </div>
 
-  <section id="summary">
-    <!-- <h1>Ronald A. Abrera</h1> -->
-    <div class="introcontainer">
-        <div class="image">
-            <img src="nad.jpeg" alt="Your Image" width="150">
-        </div>
-        <div class="text">
-            <p class="my">Hi, my name is</p>
-            <p class="name">NAD</p>
-        </div>
-        <div class="intro-text">
-            <p>I am a dedicated Software Engineer with over 10 years of experience in web development and programming. My primary focus has been on PHP, .NET, SQL, JavaScript, and Node.js, with substantial experience in the full software development lifecycle, from planning and analysis to coding, testing, and deployment. I am adept at utilizing Agile methodologies and have a proven ability to quickly learn and apply new technologies. I possess strong leadership and mentoring skills, consistently fostering a collaborative and productive team environment. I hold a BS in Computer Science from Colegio de Los Baños.</p>
-        </div>
-    </div>
+              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Academic/Administrative Management">
+                <div class="p-6 flex-1 flex flex-col">
+                  <div class="flex items-start justify-between mb-4">
+                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
+                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 13v6"/><path d="M9 16l3 3 3-3"/></svg>
+                      </div>
+                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Academic/Administrative</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">Online Graduate School Database System</h3>
+                  <p class="text-slate-600 text-sm mb-6 flex-1">Centralized database for tracking graduate student progress, thesis monitoring, and faculty advisement. **This system standardized the academic evaluation process, reducing manual data entry errors.**</p>
+                  <div class="mt-auto">
+                      <div class="flex flex-wrap gap-2 mb-4">
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PHP</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">MariaDB</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">jQuery</span>
+                      </div>
+                  </div>
+                </div>
+              </div>
 
-    
-  </section>
+              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Academic/Administrative Management">
+                <div class="p-6 flex-1 flex flex-col">
+                  <div class="flex items-start justify-between mb-4">
+                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
+                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 13v6"/><path d="M9 16l3 3 3-3"/></svg>
+                      </div>
+                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Academic/Administrative</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">Faculty Merit Promotion System</h3>
+                  <p class="text-slate-600 text-sm mb-6 flex-1">Automated evaluation platform for faculty performance metrics, streamlining promotion cycles and transparency. **Reduced the administrative processing time for promotion applications.**</p>
+                  <div class="mt-auto">
+                      <div class="flex flex-wrap gap-2 mb-4">
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Laravel</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">MariaDB</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Vuetify</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Vue.js</span>
+                      </div>
+                  </div>
+                </div>
+              </div>
 
-  <section id="skills">
-    <h2>Key Skills</h2>
-    <ul>
-      <li>Experience with database and the storage/processing/analysis of structured and unstructured streaming data</li>
-      <li>Knowledge of object oriented PHP programming</li>
-      <li>Willingness and proven ability to quickly acquire proficient development skills in new areas and technologies</li>
-      <li>Excellent Problem Solving Skill</li>
-    </ul>
-    <h2>Technologies & Methodologies</h2>
-    <ul>
-      <li>Agile Development</li>
-      <li>Scrum & Kanban</li>
-      <li>Version Control (Git)</li>
-      <li>Continuous Integration/Continuous Deployment (CI/CD)</li>
-      <li>Test-Driven Development (TDD)</li>
-      <li>RESTful API Development</li>
-      <li>Microservices Architecture</li>
-      <li>Cloud Computing (AWS, Azure)</li>
-      <li>DevOps Practices</li>
-    </ul>
-    <h2>Technical Skills</h2>
-    <ul>
-      <li>C++ | Visual Basic | PHP | C# | .NET | Javascript | Jquery | CSS | AJAX | HTML5 | MySQL | MSSQL | MariaDB | Laravel | CodeIgniter | node.js | vue.js/nuxt.js | AppSheet | AWS | Reactjs</li>
-    </ul>
+              <!-- <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Academic/Administrative Management">
+                <div class="p-6 flex-1 flex flex-col">
+                  <div class="flex items-start justify-between mb-4">
+                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
+                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 13v6"/><path d="M9 16l3 3 3-3"/></svg>
+                      </div>
+                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Academic/Administrative</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">UPLB Online Output Reporting System (ORS)</h3>
+                  <p class="text-slate-600 text-sm mb-6 flex-1">Reporting tool for tracking academic and research outputs across departments to facilitate annual reports. **Ensures 100% compliance in institutional reporting by automating data collection from researchers.**</p>
+                  <div class="mt-auto">
+                      <div class="flex flex-wrap gap-2 mb-4">
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Nuxt.js</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Vue.js</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">CodeIgniter</span>
+                      </div>
+                  </div>
+                </div>
+              </div> -->
 
-  </section>
+              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Digital Workflow & Tracking">
+                <div class="p-6 flex-1 flex flex-col">
+                  <div class="flex items-start justify-between mb-4">
+                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
+                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                      </div>
+                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Digital Workflow</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">Online Document Submission System (ODSS)</h3>
+                  <p class="text-slate-600 text-sm mb-6 flex-1">A user-friendly platform for seamless submission and real-time tracking of documents by students and other stakeholders. **Processed over 20,000 document submissions in its first year of deployment.**</p>
+                  <div class="mt-auto">
+                      <div class="flex flex-wrap gap-2 mb-4">
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Laravel</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">MariaDB</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Jquery</span>
+                      </div>
+                  </div>
+                </div>
+              </div>
 
-  <section id="experience">
-    <h2>Professional Experience</h2>
-    <ul>
-      <li style="--accent-color:#323a54">
-        <div class="date">June 2023 - Present</div>
-        <div class="title">Senior ICT Associate</div>
-        <div class="descr">UPLB Digital Transformation, Los Baños, Laguna. Develop standards, mentor, coach and assist developers and other team members to remove blockers and promote good team dynamics. Lead the development of various applications based on the identified requirements.</div>
-      </li>
-      <li style="--accent-color:#1d2643">
-        <div class="date">January 2023 - June 2023</div>
-        <div class="title">Software Development Specialist</div>
-        <div class="descr">Amdocs Philippines Inc., Taguig, Metro Manila. Developer designs, develops, modifies, debugs, and or maintains software systems. Mentoring junior team members and ensuring they adhere to determining software quality standards.</div>
-      </li>
-      <li style="--accent-color:#626466">
-        <div class="date">March 2022 - December 2022</div>
-        <div class="title">UPLB App Technical Adviser</div>
-        <div class="descr">UPLB Digital Transformation, Los Baños, Laguna. Serve as Technical Adviser to the Development Team. Assist in the design and development of software development processes and standards.</div>
-      </li>
-      <li style="--accent-color:#6e6e70">
-        <div class="date">January 2022 - September 2022</div>
-        <div class="title">Student Records Evaluator II</div>
-        <div class="descr">UPLB Graduate School, Los Baños, Laguna. Develop and maintain UPLB Graduate systems. Responsible for performing administrative and technical tasks, evaluating Plan of Study, Nomination of Guidance/Advisory Committee, Thesis/Dissertation Outline, and True Copy of Grades.</div>
-      </li>
-      <!-- Add more experience items as needed -->
-    </ul>
-  </section>
+              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Digital Workflow & Tracking">
+                <div class="p-6 flex-1 flex flex-col">
+                  <div class="flex items-start justify-between mb-4">
+                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
+                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M18 13.01h.01"/><path d="M22 9c-1.39 3.19-2.22 5.92-2.87 8.16"/><path d="M3.71 18.25c-.24-2.85-1.1-6.17-2.71-9.25"/><path d="M12 2a9.5 9.5 0 0 0-4 17.5 9.5 9.5 0 0 0 8 0 9.5 9.5 0 0 0 4-17.5"/></svg>
+                      </div>
+                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Digital Workflow</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">Virtual LogBook</h3>
+                  <p class="text-slate-600 text-sm mb-6 flex-1">Facilitates internal tracking of documents, records actions taken, generates staff performance reports (IPCR), and provides email notifications.</p>
+                  <div class="mt-auto">
+                      <div class="flex flex-wrap gap-2 mb-4">
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PHP</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Jquery</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">MariaDB</span>
+                      </div>
+                  </div>
+                </div>
+              </div>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="projects-container">
-      <div class="project-card">
-        <img src="images/odss.png" alt="Project 1 Screenshot">
-        <div class="project-info">
-          <h3>Online Document Submission System (ODSS)</h3>
-          <p>ODSS is a user-friendly platform for the seamless submission and tracking of documents by students and others. It streamlines the process, ensuring efficient management and real-time tracking, making it ideal for educational institutions and organizations.</p>
+              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Digital Workflow & Tracking">
+                <div class="p-6 flex-1 flex flex-col">
+                  <div class="flex items-start justify-between mb-4">
+                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
+                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 13v6"/><path d="M9 16l3 3 3-3"/></svg>
+                      </div>
+                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Digital Workflow</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">Graduate School Online Application for Graduation</h3>
+                  <p class="text-slate-600 text-sm mb-6 flex-1">Streamlines the complex process for graduate students applying for graduation, allowing status tracking and automated requirement checks. **Improved submission efficiency and eliminating paper forms.</p>
+                  <div class="mt-auto">
+                      <div class="flex flex-wrap gap-2 mb-4">
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PHP</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">JQuery</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">MariaDB</span>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Specialized Institutional Tools">
+                <div class="p-6 flex-1 flex flex-col">
+                  <div class="flex items-start justify-between mb-4">
+                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
+                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V7"/><path d="M8 21V7"/><path d="M2 7h20"/></svg>
+                      </div>
+                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Institutional Tool</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">The Gender and Development Management Information System (GADMIS)</h3>
+                  <p class="text-slate-600 text-sm mb-6 flex-1">Supports the implementation and monitoring of GAD initiatives, enabling budget submission, automatic computation, and data collection from different offices.</p>
+                  <div class="mt-auto">
+                      <div class="flex flex-wrap gap-2 mb-4">
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PHP</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PostgreSQL</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Chart.js</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Nuxt.js</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Laravel.js</span>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Specialized Institutional Tools">
+                <div class="p-6 flex-1 flex flex-col">
+                  <div class="flex items-start justify-between mb-4">
+                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
+                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M18 13.01h.01"/><path d="M22 9c-1.39 3.19-2.22 5.92-2.87 8.16"/><path d="M3.71 18.25c-.24-2.85-1.1-6.17-2.71-9.25"/><path d="M12 2a9.5 9.5 0 0 0-4 17.5 9.5 9.5 0 0 0 8 0 9.5 9.5 0 0 0 4-17.5"/></svg>
+                      </div>
+                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Institutional Tool</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">SIMS (Pest Control Management)</h3>
+                  <p class="text-slate-600 text-sm mb-6 flex-1">A comprehensive pest control management system that streamlines scheduling, tracking, and reporting of pest control activities.</p>
+                  <div class="mt-auto">
+                      <div class="flex flex-wrap gap-2 mb-4">
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PHP</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">React.js</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">MySQL</span>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Web Design & CMS">
+                <div class="p-6 flex-1 flex flex-col">
+                  <div class="flex items-start justify-between mb-4">
+                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
+                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 13v6"/><path d="M9 16l3 3 3-3"/></svg>
+                      </div>
+                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Web Design & CMS</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">CFNR Website (College of Forestry)</h3>
+                  <p class="text-slate-600 text-sm mb-6 flex-1">The official online portal for the UPLB College of Forestry.</p>
+                  <div class="mt-auto">
+                      <div class="flex flex-wrap gap-2 mb-4">
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">WordPress</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Elementor</span>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Web Design & CMS">
+                <div class="p-6 flex-1 flex flex-col">
+                  <div class="flex items-start justify-between mb-4">
+                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
+                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 13v6"/><path d="M9 16l3 3 3-3"/></svg>
+                      </div>
+                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Web Design & CMS</span>
+                  </div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">UPLB GS Website</h3>
+                  <p class="text-slate-600 text-sm mb-6 flex-1">Official online presence for the UPLB Graduate School, serving as the primary resource for prospective students, research faculty, and alumni. Features include advanced content search, program specific pages, and integrated news feeds.</p>
+                  <div class="mt-auto">
+                      <div class="flex flex-wrap gap-2 mb-4">
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">WordPress</span>
+                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Divi</span>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" class="py-24 bg-white">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-base text-accent font-semibold tracking-wide uppercase">Get In Touch</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                    Let's Build Something Impactful
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-slate-500 mx-auto">
+                    I am open to new senior-level opportunities in system architecture, leadership, and digital transformation.
+                </p>
+            </div>
+            <div class="flex justify-center">
+                <div class="bg-slate-50 p-8 rounded-2xl shadow-xl border border-slate-100 max-w-md w-full">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-6 h-6 text-accent mr-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.83 1.83 0 0 1-2.06 0L2 7"/></svg>
+                        <span class="text-lg font-bold text-slate-900">Email</span>
+                    </div>
+                    <p class="text-slate-600 text-xl font-mono mb-6">csnadabrera@gmail.com</p>
+                    <a href="mailto:csnadabrera@gmail.com" class="w-full flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-accent hover:bg-blue-600 transition-all duration-300 shadow-md">
+                        Send a Message
+                    </a>
+                </div>
+            </div>
+          </div>
+        </section>
+    </main>
+
+    <footer class="bg-primary text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-6">
+                <p class="text-sm text-slate-400">&copy; <span id="year"></span> Ronald Abrera. All rights reserved.</p>
+                <p class="text-xs text-slate-400 mt-1">Senior Software Engineer Portfolio</p>
+            </div>
+            <div class="flex justify-center space-x-4">
+                <a href="https://github.com/gsraabrera" target="_blank" class="text-slate-400 hover:text-accent transition-colors duration-200" aria-label="GitHub">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22V6h-1.5L9 6v16"/><path d="M14 17l4-2-4-2"/></svg>
+                </a>
+                <a href="#" class="text-slate-400 hover:text-accent transition-colors duration-200" aria-label="LinkedIn">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 0-6-6h-2a6 6 0 0 0-6 6v7h4v-7a2 2 0 1 1 4 0v7h4v-7Z"/><path d="M4 22v-7"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+            </div>
         </div>
-      </div>
-      <div class="project-card">
-        <img src="images/olgsdb.png" alt="Project 2 Screenshot">
-        <div class="project-info">
-          <h3>Online Graduate School Database System</h3>
-          <p>The Online Graduate School Database System is a dedicated platform for managing the academic records of UPLB Graduate School. It provides efficient and secure access to student information, streamlines academic processes, and supports the administrative needs of the institution.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img src="images/amis.png" alt="Project 2 Screenshot">
-        <div class="project-info">
-          <h3>Academic Management Information System (AMIS)</h3>
-          <p>The AMIS is a comprehensive platform encompassing enrollment, academic management, program administration, student grades, and other essential academic processes. It streamlines and integrates various academic functions, providing a centralized and efficient solution for educational institutions.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img src="images/fmp.png" alt="Project 2 Screenshot">
-        <div class="project-info">
-          <h3>Faculty Merit Promotion System</h3>
-          <p>The Faculty Merit Promotion System facilitates the entire promotion application process, from submission to evaluation, status tracking, and analytics. It streamlines the promotion workflow, ensuring efficiency and transparency for faculty members and administrators while providing valuable insights through detailed analytics.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img src="images/cfnr website.png" alt="Project 2 Screenshot">
-        <div class="project-info">
-          <h3>CFNR Website</h3>
-          <p>The CFNR Website is the official online portal for the University of the Philippines Los Baños College of Forestry. It provides comprehensive information about the college, including academic programs, research initiatives, faculty profiles, and student resources. The website aims to enhance engagement with current and prospective students, alumni, and stakeholders by offering an accessible and informative digital presence.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img src="images/applicationforgraduation.png" alt="Project 2 Screenshot">
-        <div class="project-info">
-          <h3>Graduate School Online Application for Graduation</h3>
-          <p>The Graduate School Online Application for Graduation system streamlines the process for graduate students applying for graduation. It enables students to submit applications, track their status, and receive updates, providing a convenient and efficient solution for managing graduation requirements.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img src="images/sims.jpg" alt="Project 2 Screenshot">
-        <div class="project-info">
-          <h3>SIMS</h3>
-          <p>SIMS is a comprehensive pest control management system. It streamlines scheduling, tracking, and reporting of pest control activities, ensuring effective and efficient pest management for businesses and organizations.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img src="images/gadmis.png" alt="Project 2 Screenshot">
-        <div class="project-info">
-          <h3>The Gender and Development Management Information System</h3>
-          <p>GADMIS supports the implementation and monitoring of gender and development initiatives. It enables the submission of budgets, automatic computation, and streamlines the process of collecting data from different offices, ensuring efficient management and promotion of gender-responsive policies and programs.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img src="images/tracking.png" alt="Project 2 Screenshot">
-        <div class="project-info">
-          <h3>Virtual LogBook</h3>
-          <p>The Virtual LogBook, integrated with the Online Document Submission System, facilitates internal tracking of documents within the office. It records all actions taken, generates IPCR for document processing, and features email notifications for status updates. Additionally, it generates reports for analytics, allowing for monitoring of the number of documents processed by staff, ensuring efficient and transparent document management.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img src="images/ors.jpeg" alt="Project 2 Screenshot">
-        <div class="project-info">
-          <h3>UPLB Online Output Reporting System (ORS)</h3>
-          <p>The UPLB Online Output Reporting System (ORS) provides UPLB employees with a streamlined method for registering their scholarly output. It facilitates the entire process from submission to evaluation and approval, supporting various purposes such as Faculty/REPS Service Records, Faculty/REPS Merit Promotion, and other reports and systems that require scholarly information.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <section id="contact">
-    <div class="contact-container">
-        <h2>Contact Me</h2>
-        <p>Email: csnadabrera@gmail.com<br>Phone: 09154070136</p>
-    </div>
-  </section>
-  <script src="script.js"></script>
+    </footer>
+
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            
+            menu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Footer Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Project Filtering - FIXED LOGIC
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projects = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.getAttribute('data-filter');
+                
+                // 1. Update active button state (removes old styles, applies new ones)
+                filterBtns.forEach(b => {
+                    // Reset all buttons to inactive state
+                    b.classList.remove('bg-primary', 'text-white', 'shadow-md');
+                    b.classList.add('bg-white', 'text-slate-600', 'hover:bg-slate-200', 'border', 'border-slate-200');
+                });
+                
+                // Set clicked button to active state
+                btn.classList.remove('bg-white', 'text-slate-600', 'hover:bg-slate-200', 'border', 'border-slate-200');
+                btn.classList.add('bg-primary', 'text-white', 'shadow-md');
+
+                // 2. Filter projects
+                projects.forEach(project => {
+                    const projectCategory = project.getAttribute('data-category');
+                    
+                    if (filter === 'All' || projectCategory === filter) {
+                        // Show project (ensure it's using the correct display utility: flex)
+                        project.classList.remove('hidden');
+                        project.classList.add('flex', 'fade-in'); 
+                    } else {
+                        // Hide project
+                        project.classList.add('hidden');
+                        project.classList.remove('flex', 'fade-in');
+                    }
+                });
+            });
+        });
+
+    </script>
+<script type="module" src="/index.tsx"></script>
 </body>
 </html>
