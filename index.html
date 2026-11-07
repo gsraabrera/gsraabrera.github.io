@@ -1,776 +1,671 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Senior Software Engineer Portfolio</title>
+    <title>Ronald Abrera | Senior Software Engineer & Tech Lead</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: '#0f172a', // Slate 900
-              secondary: '#334155', // Slate 700
-              accent: '#3b82f6', // Blue 500
-              background: '#f8fafc', // Slate 50
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                        }
+                    }
+                }
             }
-          }
         }
-      }
     </script>
-    <style>
-      /* Custom scrollbar for webkit */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f1f1;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8;
-      }
-      .fade-in {
-        animation: fadeIn 0.5s ease-in-out;
-      }
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      /* Chatbot transition classes */
-      .chat-window {
-        transition: all 0.3s ease-in-out;
-        transform-origin: bottom right;
-      }
-      .chat-window.hidden-chat {
-        opacity: 0;
-        transform: scale(0.9);
-        pointer-events: none;
-      }
-      .chat-window.visible-chat {
-        opacity: 1;
-        transform: scale(1);
-        pointer-events: auto;
-      }
-    </style>
-    <script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.32.0",
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.557.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.1/"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
 </head>
-<body class="bg-background text-slate-800 antialiased">
 
-    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-          <div class="flex items-center">
-            <svg class="h-8 w-8 text-accent" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 7 5 5-5 5"/><path d="m19 17-5-5 5-5"/></svg>
-            <span class="ml-2 text-xl font-bold text-slate-800 tracking-tight">Ronald Abrera</span>
-          </div>
-          
-          <div class="hidden md:block">
-            <div class="ml-10 flex items-baseline space-x-8">
-              <a href="#summary" class="text-slate-600 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Summary</a>
-              <a href="#skills" class="text-slate-600 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Skills</a>
-              <a href="#projects" class="text-slate-600 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Projects</a>
-              <a href="#contact" class="text-slate-600 hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Contact</a>
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-emerald-500 selection:text-slate-950">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 inset-x-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="font-mono text-lg font-bold tracking-tight text-white flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                ronald.dev
+            </a>
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="#summary" class="hover:text-emerald-400 transition-colors">Summary</a>
+                <a href="#methodology" class="hover:text-emerald-400 transition-colors">How I Work</a>
+                <a href="#projects" class="hover:text-emerald-400 transition-colors">Projects</a>
+                <a href="#skills" class="hover:text-emerald-400 transition-colors">Skills</a>
+                <a href="#contact" class="hover:text-emerald-400 transition-colors">Contact</a>
             </div>
-          </div>
-          
-          <div class="-mr-2 flex md:hidden">
-            <button id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-accent focus:outline-none">
-              <svg id="menu-icon" class="h-6 w-6 block" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-              <svg id="close-icon" class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-            </button>
-          </div>
+            <div class="flex items-center gap-3">
+                <a href="https://github.com/gsraabrera" target="_blank" rel="noopener noreferrer"
+                    class="p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white transition-all"
+                    title="GitHub">
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                </a>
+                <a href="mailto:csnadabrera@gmail.com"
+                    class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-all">
+                    Get in Touch
+                </a>
+            </div>
         </div>
-      </div>
-
-      <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <a href="#summary" class="text-slate-600 hover:text-accent block px-3 py-2 rounded-md text-base font-medium">Summary</a>
-          <a href="#skills" class="text-slate-600 hover:text-accent block px-3 py-2 rounded-md text-base font-medium">Skills</a>
-          <a href="#projects" class="text-slate-600 hover:text-accent block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-          <a href="#contact" class="text-slate-600 hover:text-accent block px-3 py-2 rounded-md text-base font-medium">Contact</a>
-        </div>
-      </div>
     </nav>
 
-    <main>
-        <section id="summary" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-gradient-to-br from-slate-50 to-slate-100 overflow-hidden">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center">
-                <div class="inline-flex items-center justify-center p-2 bg-blue-50 rounded-full mb-6">
-                    <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>
-                    <span class="text-accent text-sm font-semibold tracking-wide uppercase">Senior Software Engineer & Tech Lead</span>
-                </div>
-              <h1 class="text-4xl tracking-tight font-extrabold text-slate-900 sm:text-5xl md:text-6xl lg:text-7xl mb-6">
-                Developing Scalable <br class="hidden sm:block" />
-                <span class="text-accent">Institutional Systems</span>
-              </h1>
-              <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-600 mb-10 leading-relaxed">
-                A results-oriented Senior Software Engineer with over 10 years of experience managing the full Software Development Lifecycle (SDLC). Specialized in architecting and deploying large-scale, mission-critical administrative and educational systems. Experienced in agile environments, mentoring development teams, and driving efficiency through strategic digital solutions.
-              </p>
-              <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-                <div class="rounded-md shadow">
-                  <a href="#projects" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-accent hover:bg-blue-600 md:py-4 md:text-lg transition-all duration-300 shadow-lg hover:shadow-blue-500/30">
-                    View Projects
-                  </a>
-                </div>
-                <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                  <a href="#contact" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-accent bg-white hover:bg-slate-50 md:py-4 md:text-lg border-slate-200">
-                    Contact Me
-                  </a>
-                </div>
-              </div>
-            </div>
-            
-            <div class="mt-20 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
-                    <div class="h-2 w-12 bg-accent rounded-full mb-4"></div>
-                    <p class="text-slate-700 font-medium">10+ Years in Software Engineering</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
-                    <div class="h-2 w-12 bg-accent rounded-full mb-4"></div>
-                    <p class="text-slate-700 font-medium">Expertise in Large-Scale Institutional Systems</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
-                    <div class="h-2 w-12 bg-accent rounded-full mb-4"></div>
-                    <p class="text-slate-700 font-medium">Agile Methodology (Scrum/Kanban) Leadership</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
-                    <div class="h-2 w-12 bg-accent rounded-full mb-4"></div>
-                    <p class="text-slate-700 font-medium">Full-stack Architecture & Optimization</p>
-                </div>
-            </div>
-          </div>
-          
-          <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-[800px] bg-gradient-to-b from-blue-50/50 to-transparent rounded-[100%] pointer-events-none -z-0"></div>
-        </section>
+    <!-- Hero / Summary Section -->
+    <section id="summary" class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono uppercase tracking-wider mb-6">
+            <i data-lucide="terminal" class="w-3.5 h-3.5"></i> Senior Software Engineer &amp; Tech Lead
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6">
+            Developing Scalable <br class="hidden sm:inline" />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Institutional
+                Systems</span>
+        </h1>
+        <p class="text-lg text-slate-400 max-w-3xl leading-relaxed mb-10">
+            A results-oriented Senior Software Engineer with over 10 years of experience managing the full Software
+            Development Lifecycle (SDLC). Specialized in architecting and deploying large-scale, mission-critical
+            administrative and educational systems. Experienced in agile environments, mentoring development teams, and
+            driving efficiency through strategic digital solutions.
+        </p>
 
-        <section id="skills" class="py-24 bg-white">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-              <h2 class="text-base text-accent font-semibold tracking-wide uppercase">Technical Expertise</h2>
-              <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-                Full-Stack Proficiency
-              </p>
-              <p class="mt-4 max-w-2xl text-xl text-slate-500 mx-auto">
-                A versatile MERN/LAMP stack background with deep specialization in cloud infrastructure and database architecture.
-              </p>
+        <!-- Key Highlights / Metrics -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
+                <div class="text-3xl font-extrabold text-emerald-400 mb-1">15,000+</div>
+                <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">Active AMIS Users</div>
+            </div>
+            <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
+                <div class="text-3xl font-extrabold text-cyan-400 mb-1">20,000+</div>
+                <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">ODSS Submissions / Year</div>
+            </div>
+            <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
+                <div class="text-3xl font-extrabold text-emerald-400 mb-1">10+ Years</div>
+                <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">In Software Engineering</div>
+            </div>
+            <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
+                <div class="text-3xl font-extrabold text-cyan-400 mb-1">5+ Years</div>
+                <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">Legacy Data Migrated</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW I WORK / METHODOLOGY SECTION -->
+    <section id="methodology" class="py-20 border-t border-slate-800/80 bg-slate-900/40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-emerald-400 mb-2">Engineering Practices</h2>
+                <h3 class="text-3xl font-bold text-white">How I Work &amp; Lead Teams</h3>
+                <p class="text-slate-400 text-sm max-w-2xl mt-2">
+                    Bridging technical architecture with institutional needs through disciplined workflows, continuous
+                    mentorship, and reliable engineering standards.
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
-              <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-shadow duration-300">
-                <div class="flex items-center mb-6">
-                  <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-lg bg-primary text-white">
-                      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>
-                  </div>
-                  <h3 class="ml-4 text-xl font-bold text-slate-900">Backend & Architecture</h3>
-                </div>
-                <ul class="space-y-4">
-                  <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             PHP (Laravel, CodeIgniter)
-                        </span>
-                        <span class="text-slate-400 text-sm">95%</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Pillar 1 -->
+                <div
+                    class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/40 transition-all">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mb-4">
+                        <i data-lucide="layers" class="w-5 h-5"></i>
                     </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 95%"></div>
-                    </div>
-                  </li>
-                  <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             Node.js (Express, NestJS)
-                        </span>
-                        <span class="text-slate-400 text-sm">75%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 75%"></div>
-                    </div>
-                  </li>
-                  <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             .NET Core / C#
-                        </span>
-                        <span class="text-slate-400 text-sm">75%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 75%"></div>
-                    </div>
-                  </li>
-                   <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             RESTful API Design
-                        </span>
-                        <span class="text-slate-400 text-sm">95%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 95%"></div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-shadow duration-300">
-                <div class="flex items-center mb-6">
-                  <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-lg bg-primary text-white">
-                      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="21" y2="9"/></svg>
-                  </div>
-                  <h3 class="ml-4 text-xl font-bold text-slate-900">Frontend Development</h3>
-                </div>
-                <ul class="space-y-4">
-                  <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             React.js / Next.js
-                        </span>
-                        <span class="text-slate-400 text-sm">75%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 75%"></div>
-                    </div>
-                  </li>
-                  <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             Vue.js / Nuxt.js
-                        </span>
-                        <span class="text-slate-400 text-sm">90%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 90%"></div>
-                    </div>
-                  </li>
-                  <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             JavaScript / TypeScript
-                        </span>
-                        <span class="text-slate-400 text-sm">95%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 95%"></div>
-                    </div>
-                  </li>
-                  <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             WordPress
-                        </span>
-                        <span class="text-slate-400 text-sm">85%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 85%"></div>
-                    </div>
-                  </li>
-                  <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             Elementor
-                        </span>
-                        <span class="text-slate-400 text-sm">80%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
-                    </div>
-                  </li>
-                  <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             Divi
-                        </span>
-                        <span class="text-slate-400 text-sm">80%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
-                    </div>
-                  </li>
-                  <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                            <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                            Flutter
-                        </span>
-                        <span class="text-slate-400 text-sm">75%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 75%"></div>
-                    </div>
-                </li>
-                <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                            <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                            Capacitor
-                        </span>
-                        <span class="text-slate-400 text-sm">80%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
-                    </div>
-                </li>
-                  <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             Tailwind CSS
-                        </span>
-                        <span class="text-slate-400 text-sm">90%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 90%"></div>
-                    </div>
-                  </li>
-                   <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             Vuetify (UI Framework)
-                        </span>
-                        <span class="text-slate-400 text-sm">80%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-lg transition-shadow duration-300">
-                <div class="flex items-center mb-6">
-                  <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-lg bg-primary text-white">
-                      <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s 9-1.34 9-3V5"/></svg>
-                  </div>
-                  <h3 class="ml-4 text-xl font-bold text-slate-900">Database, Cloud & DevOps</h3>
-                </div>
-                <ul class="space-y-4">
-                  <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             SQL (MySQL, MSSQL, MariaDB, PostgreSQL)
-                        </span>
-                        <span class="text-slate-400 text-sm">95%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 95%"></div>
-                    </div>
-                  </li>
-                  <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             AWS (EC2, S3, RDS)
-                        </span>
-                        <span class="text-slate-400 text-sm">80%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
-                    </div>
-                  </li>
-                   <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             DevOps (CI/CD, Docker, Git)
-                        </span>
-                        <span class="text-slate-400 text-sm">75%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 75%"></div>
-                    </div>
-                  </li>
-                   <li class="flex flex-col">
-                    <div class="flex justify-between mb-1">
-                        <span class="text-slate-700 font-medium flex items-center">
-                             <svg class="w-4 h-4 text-accent mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                             Automation Testing (Cypress, Jest)
-                        </span>
-                        <span class="text-slate-400 text-sm">80%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2">
-                        <div class="bg-accent h-2 rounded-full" style="width: 80%"></div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="projects" class="py-24 bg-slate-50">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-12 md:flex md:items-center md:justify-between">
-                <div class="mb-8 md:mb-0">
-                    <h2 class="text-base text-accent font-semibold tracking-wide uppercase">Portfolio</h2>
-                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-                        Selected Works
+                    <h4 class="text-lg font-bold text-white mb-2">Architecture &amp; SDLC</h4>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Executing end-to-end SDLC from requirements analysis to containerized CI/CD deployment,
+                        prioritizing high availability, database indexing, and modular clean architectures.
                     </p>
                 </div>
-                
-                <div class="flex flex-wrap gap-2" id="project-filters">
-                    <button data-filter="All" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-primary text-white shadow-md border border-slate-200">All</button>
-                    <button data-filter="Academic/Administrative Management" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-white text-slate-600 hover:bg-slate-200 border border-slate-200">Academic/Administrative Management</button>
-                    <button data-filter="Digital Workflow & Tracking" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-white text-slate-600 hover:bg-slate-200 border border-slate-200">Digital Workflow & Tracking</button>
-                    <button data-filter="Web Design & CMS" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-white text-slate-600 hover:bg-slate-200 border border-slate-200">Web Design & CMS</button>
-                    <button data-filter="Specialized Institutional Tools" class="filter-btn px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-white text-slate-600 hover:bg-slate-200 border border-slate-200">Specialized Institutional Tools</button>
-                </div>
-            </div>
-    
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
-              
-              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Academic/Administrative Management">
-                <div class="p-6 flex-1 flex flex-col">
-                  <div class="flex items-start justify-between mb-4">
-                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
-                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 13v6"/><path d="M9 16l3 3 3-3"/></svg>
-                      </div>
-                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Academic/Administrative</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">Academic Management Information System (AMIS)</h3>
-                  <p class="text-slate-600 text-sm mb-6 flex-1">A comprehensive system managing student records, enrollment, and grading for university-wide operations. **Successfully migrated 5+ years of legacy data, supporting over 15,000 active users.**</p>
-                  <div class="mt-auto">
-                      <div class="flex flex-wrap gap-2 mb-4">
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PHP</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Laravel</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PostgreSQL</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Nuxt.js</span>
-                      </div>
-                  </div>
-                </div>
-              </div>
 
-              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Academic/Administrative Management">
-                <div class="p-6 flex-1 flex flex-col">
-                  <div class="flex items-start justify-between mb-4">
-                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
-                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 13v6"/><path d="M9 16l3 3 3-3"/></svg>
-                      </div>
-                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Academic/Administrative</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">Online Graduate School Database System</h3>
-                  <p class="text-slate-600 text-sm mb-6 flex-1">Centralized database for tracking graduate student progress, thesis monitoring, and faculty advisement. **This system standardized the academic evaluation process, reducing manual data entry errors.**</p>
-                  <div class="mt-auto">
-                      <div class="flex flex-wrap gap-2 mb-4">
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PHP</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">MariaDB</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">jQuery</span>
-                      </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Academic/Administrative Management">
-                <div class="p-6 flex-1 flex flex-col">
-                  <div class="flex items-start justify-between mb-4">
-                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
-                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 13v6"/><path d="M9 16l3 3 3-3"/></svg>
-                      </div>
-                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Academic/Administrative</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">Faculty Merit Promotion System</h3>
-                  <p class="text-slate-600 text-sm mb-6 flex-1">Automated evaluation platform for faculty performance metrics, streamlining promotion cycles and transparency. **Reduced the administrative processing time for promotion applications.**</p>
-                  <div class="mt-auto">
-                      <div class="flex flex-wrap gap-2 mb-4">
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Laravel</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">MariaDB</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Vuetify</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Vue.js</span>
-                      </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Academic/Administrative Management">
-                <div class="p-6 flex-1 flex flex-col">
-                  <div class="flex items-start justify-between mb-4">
-                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
-                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 13v6"/><path d="M9 16l3 3 3-3"/></svg>
-                      </div>
-                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Academic/Administrative</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">UPLB Online Output Reporting System (ORS)</h3>
-                  <p class="text-slate-600 text-sm mb-6 flex-1">Reporting tool for tracking academic and research outputs across departments to facilitate annual reports. **Ensures 100% compliance in institutional reporting by automating data collection from researchers.**</p>
-                  <div class="mt-auto">
-                      <div class="flex flex-wrap gap-2 mb-4">
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Nuxt.js</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Vue.js</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">CodeIgniter</span>
-                      </div>
-                  </div>
-                </div>
-              </div> -->
-
-              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Digital Workflow & Tracking">
-                <div class="p-6 flex-1 flex flex-col">
-                  <div class="flex items-start justify-between mb-4">
-                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
-                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-                      </div>
-                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Digital Workflow</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">Online Document Submission System (ODSS)</h3>
-                  <p class="text-slate-600 text-sm mb-6 flex-1">A user-friendly platform for seamless submission and real-time tracking of documents by students and other stakeholders. **Processed over 20,000 document submissions in its first year of deployment.**</p>
-                  <div class="mt-auto">
-                      <div class="flex flex-wrap gap-2 mb-4">
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Laravel</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">MariaDB</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Jquery</span>
-                      </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Digital Workflow & Tracking">
-                <div class="p-6 flex-1 flex flex-col">
-                  <div class="flex items-start justify-between mb-4">
-                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
-                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M18 13.01h.01"/><path d="M22 9c-1.39 3.19-2.22 5.92-2.87 8.16"/><path d="M3.71 18.25c-.24-2.85-1.1-6.17-2.71-9.25"/><path d="M12 2a9.5 9.5 0 0 0-4 17.5 9.5 9.5 0 0 0 8 0 9.5 9.5 0 0 0 4-17.5"/></svg>
-                      </div>
-                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Digital Workflow</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">Virtual LogBook</h3>
-                  <p class="text-slate-600 text-sm mb-6 flex-1">Facilitates internal tracking of documents, records actions taken, generates staff performance reports (IPCR), and provides email notifications.</p>
-                  <div class="mt-auto">
-                      <div class="flex flex-wrap gap-2 mb-4">
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PHP</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Jquery</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">MariaDB</span>
-                      </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Digital Workflow & Tracking">
-                <div class="p-6 flex-1 flex flex-col">
-                  <div class="flex items-start justify-between mb-4">
-                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
-                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 13v6"/><path d="M9 16l3 3 3-3"/></svg>
-                      </div>
-                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Digital Workflow</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">Graduate School Online Application for Graduation</h3>
-                  <p class="text-slate-600 text-sm mb-6 flex-1">Streamlines the complex process for graduate students applying for graduation, allowing status tracking and automated requirement checks. **Improved submission efficiency and eliminating paper forms.</p>
-                  <div class="mt-auto">
-                      <div class="flex flex-wrap gap-2 mb-4">
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PHP</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">JQuery</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">MariaDB</span>
-                      </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Specialized Institutional Tools">
-                <div class="p-6 flex-1 flex flex-col">
-                  <div class="flex items-start justify-between mb-4">
-                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
-                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V7"/><path d="M8 21V7"/><path d="M2 7h20"/></svg>
-                      </div>
-                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Institutional Tool</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">The Gender and Development Management Information System (GADMIS)</h3>
-                  <p class="text-slate-600 text-sm mb-6 flex-1">Supports the implementation and monitoring of GAD initiatives, enabling budget submission, automatic computation, and data collection from different offices.</p>
-                  <div class="mt-auto">
-                      <div class="flex flex-wrap gap-2 mb-4">
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PHP</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PostgreSQL</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Chart.js</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Nuxt.js</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Laravel.js</span>
-                      </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Specialized Institutional Tools">
-                <div class="p-6 flex-1 flex flex-col">
-                  <div class="flex items-start justify-between mb-4">
-                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
-                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M18 13.01h.01"/><path d="M22 9c-1.39 3.19-2.22 5.92-2.87 8.16"/><path d="M3.71 18.25c-.24-2.85-1.1-6.17-2.71-9.25"/><path d="M12 2a9.5 9.5 0 0 0-4 17.5 9.5 9.5 0 0 0 8 0 9.5 9.5 0 0 0 4-17.5"/></svg>
-                      </div>
-                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Institutional Tool</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">SIMS (Pest Control Management)</h3>
-                  <p class="text-slate-600 text-sm mb-6 flex-1">A comprehensive pest control management system that streamlines scheduling, tracking, and reporting of pest control activities.</p>
-                  <div class="mt-auto">
-                      <div class="flex flex-wrap gap-2 mb-4">
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">PHP</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">React.js</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">MySQL</span>
-                      </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Web Design & CMS">
-                <div class="p-6 flex-1 flex flex-col">
-                  <div class="flex items-start justify-between mb-4">
-                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
-                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 13v6"/><path d="M9 16l3 3 3-3"/></svg>
-                      </div>
-                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Web Design & CMS</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">CFNR Website (College of Forestry)</h3>
-                  <p class="text-slate-600 text-sm mb-6 flex-1">The official online portal for the UPLB College of Forestry.</p>
-                  <div class="mt-auto">
-                      <div class="flex flex-wrap gap-2 mb-4">
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">WordPress</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Elementor</span>
-                      </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="project-card bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-all duration-300 group flex flex-col h-full fade-in" data-category="Web Design & CMS">
-                <div class="p-6 flex-1 flex flex-col">
-                  <div class="flex items-start justify-between mb-4">
-                      <div class="p-2 bg-blue-50 rounded-lg text-accent">
-                          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 13v6"/><path d="M9 16l3 3 3-3"/></svg>
-                      </div>
-                      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider border border-slate-100 px-2 py-1 rounded">Web Design & CMS</span>
-                  </div>
-                  <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-accent transition-colors">UPLB GS Website</h3>
-                  <p class="text-slate-600 text-sm mb-6 flex-1">Official online presence for the UPLB Graduate School, serving as the primary resource for prospective students, research faculty, and alumni. Features include advanced content search, program specific pages, and integrated news feeds.</p>
-                  <div class="mt-auto">
-                      <div class="flex flex-wrap gap-2 mb-4">
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">WordPress</span>
-                          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800">Divi</span>
-                      </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        <section id="contact" class="py-24 bg-white">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-base text-accent font-semibold tracking-wide uppercase">Get In Touch</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-                    Let's Build Something Impactful
-                </p>
-                <p class="mt-4 max-w-2xl text-xl text-slate-500 mx-auto">
-                    I am open to new senior-level opportunities in system architecture, leadership, and digital transformation.
-                </p>
-            </div>
-            <div class="flex justify-center">
-                <div class="bg-slate-50 p-8 rounded-2xl shadow-xl border border-slate-100 max-w-md w-full">
-                    <div class="flex items-center mb-4">
-                        <svg class="w-6 h-6 text-accent mr-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.83 1.83 0 0 1-2.06 0L2 7"/></svg>
-                        <span class="text-lg font-bold text-slate-900">Email</span>
+                <!-- Pillar 2 -->
+                <div
+                    class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 transition-all">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center mb-4">
+                        <i data-lucide="check-circle" class="w-5 h-5"></i>
                     </div>
-                    <p class="text-slate-600 text-xl font-mono mb-6">csnadabrera@gmail.com</p>
-                    <a href="mailto:csnadabrera@gmail.com" class="w-full flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-accent hover:bg-blue-600 transition-all duration-300 shadow-md">
-                        Send a Message
-                    </a>
+                    <h4 class="text-lg font-bold text-white mb-2">Code Quality &amp; QA</h4>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Establishing strict linting, systematic peer code reviews, and automated testing routines
+                        (Cypress, Jest) to squash regressions early and eliminate technical debt.
+                    </p>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div
+                    class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-purple-500/40 transition-all">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center mb-4">
+                        <i data-lucide="users" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Team Mentorship</h4>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Mentoring junior developers through pair programming and clear documentation. Unblocking
+                        technical roadblocks to maintain high sprint velocity across Scrum and Kanban cycles.
+                    </p>
+                </div>
+
+                <!-- Pillar 4 -->
+                <div
+                    class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-amber-500/40 transition-all">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mb-4">
+                        <i data-lucide="compass" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white mb-2">Stakeholder Alignment</h4>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Translating high-level administrative governance, academic guidelines, and user demands into
+                        realistic, high-impact engineering milestones.
+                    </p>
                 </div>
             </div>
-          </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer class="bg-primary text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="mb-6">
-                <p class="text-sm text-slate-400">&copy; <span id="year"></span> Ronald Abrera. All rights reserved.</p>
-                <p class="text-xs text-slate-400 mt-1">Senior Software Engineer Portfolio</p>
+    <!-- Projects Section (All 10 Projects) -->
+    <section id="projects" class="py-20 border-t border-slate-800/80 bg-slate-900/20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <h2 class="text-xs uppercase font-mono tracking-widest text-emerald-400 mb-2">Portfolio</h2>
+                    <h3 class="text-3xl font-bold text-white">Selected Works</h3>
+                </div>
+                <!-- Category Filter Tabs -->
+                <div class="flex flex-wrap gap-2 mt-4 md:mt-0" id="filter-container">
+                    <button onclick="filterProjects('all')"
+                        class="filter-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition-all"
+                        data-category="all">All</button>
+                    <button onclick="filterProjects('academic')"
+                        class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all"
+                        data-category="academic">Academic &amp; Admin</button>
+                    <button onclick="filterProjects('workflow')"
+                        class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all"
+                        data-category="workflow">Digital Workflows</button>
+                    <button onclick="filterProjects('institutional')"
+                        class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all"
+                        data-category="institutional">Institutional Tools</button>
+                    <button onclick="filterProjects('cms')"
+                        class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all"
+                        data-category="cms">Web &amp; CMS</button>
+                </div>
             </div>
-            <div class="flex justify-center space-x-4">
-                <a href="https://github.com/gsraabrera" target="_blank" class="text-slate-400 hover:text-accent transition-colors duration-200" aria-label="GitHub">
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22V6h-1.5L9 6v16"/><path d="M14 17l4-2-4-2"/></svg>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="projects-grid">
+                <!-- 1. AMIS -->
+                <div
+                    class="project-card academic p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-mono text-emerald-400 mb-3">
+                            <span>Academic/Administrative</span>
+                            <span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">15,000+
+                                Users</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Academic Management Information System (AMIS)</h4>
+                        <p class="text-sm text-slate-400 mb-4 leading-relaxed">
+                            A comprehensive system managing student records, enrollment, and grading for university-wide
+                            operations. <strong>Successfully migrated 5+ years of legacy data, supporting over 15,000
+                                active users.</strong>
+                        </p>
+                    </div>
+                    <div
+                        class="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800/80 font-mono text-xs text-slate-300">
+                        <span class="px-2 py-1 rounded bg-slate-800">PHP</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">Laravel</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">PostgreSQL</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">Nuxt.js</span>
+                    </div>
+                </div>
+
+                <!-- 2. Online Graduate School Database System -->
+                <div
+                    class="project-card academic p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-mono text-emerald-400 mb-3">
+                            <span>Academic/Administrative</span>
+                            <span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">Data
+                                Centralization</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Online Graduate School Database System</h4>
+                        <p class="text-sm text-slate-400 mb-4 leading-relaxed">
+                            Centralized database for tracking graduate student progress, thesis monitoring, and faculty
+                            advisement. <strong>Standardized the academic evaluation process, reducing manual data entry
+                                errors.</strong>
+                        </p>
+                    </div>
+                    <div
+                        class="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800/80 font-mono text-xs text-slate-300">
+                        <span class="px-2 py-1 rounded bg-slate-800">PHP</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">MariaDB</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">jQuery</span>
+                    </div>
+                </div>
+
+                <!-- 3. Faculty Merit Promotion System -->
+                <div
+                    class="project-card academic p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-mono text-emerald-400 mb-3">
+                            <span>Academic/Administrative</span>
+                            <span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">Evaluation
+                                Engine</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Faculty Merit Promotion System</h4>
+                        <p class="text-sm text-slate-400 mb-4 leading-relaxed">
+                            Automated evaluation platform for faculty performance metrics, streamlining promotion cycles
+                            and transparency. <strong>Reduced the administrative turnaround time for promotion
+                                applications.</strong>
+                        </p>
+                    </div>
+                    <div
+                        class="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800/80 font-mono text-xs text-slate-300">
+                        <span class="px-2 py-1 rounded bg-slate-800">Laravel</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">MariaDB</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">Vuetify</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">Vue.js</span>
+                    </div>
+                </div>
+
+                <!-- 4. ODSS -->
+                <div
+                    class="project-card workflow p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-mono text-cyan-400 mb-3">
+                            <span>Digital Workflow</span>
+                            <span class="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">20,000+
+                                Submissions</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Online Document Submission System (ODSS)</h4>
+                        <p class="text-sm text-slate-400 mb-4 leading-relaxed">
+                            A user-friendly platform for seamless submission and real-time tracking of documents by
+                            students and other stakeholders. <strong>Processed over 20,000 document submissions in its
+                                first year of deployment.</strong>
+                        </p>
+                    </div>
+                    <div
+                        class="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800/80 font-mono text-xs text-slate-300">
+                        <span class="px-2 py-1 rounded bg-slate-800">Laravel</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">MariaDB</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">jQuery</span>
+                    </div>
+                </div>
+
+                <!-- 5. Virtual LogBook -->
+                <div
+                    class="project-card workflow p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-mono text-cyan-400 mb-3">
+                            <span>Digital Workflow</span>
+                            <span class="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">Staff
+                                Tracking</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Virtual LogBook</h4>
+                        <p class="text-sm text-slate-400 mb-4 leading-relaxed">
+                            Facilitates internal tracking of documents, records actions taken, generates staff
+                            performance reports (IPCR), and provides automated email notifications.
+                        </p>
+                    </div>
+                    <div
+                        class="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800/80 font-mono text-xs text-slate-300">
+                        <span class="px-2 py-1 rounded bg-slate-800">PHP</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">jQuery</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">MariaDB</span>
+                    </div>
+                </div>
+
+                <!-- 6. Online Application for Graduation -->
+                <div
+                    class="project-card workflow p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-mono text-cyan-400 mb-3">
+                            <span>Digital Workflow</span>
+                            <span class="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">Paperless
+                                Clearance</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">Graduate School Online Application for Graduation
+                        </h4>
+                        <p class="text-sm text-slate-400 mb-4 leading-relaxed">
+                            Streamlines the complex process for graduate students applying for graduation, allowing
+                            real-time status tracking, automated requirement checks, and eliminating paper forms.
+                        </p>
+                    </div>
+                    <div
+                        class="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800/80 font-mono text-xs text-slate-300">
+                        <span class="px-2 py-1 rounded bg-slate-800">PHP</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">jQuery</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">MariaDB</span>
+                    </div>
+                </div>
+
+                <!-- 7. GADMIS -->
+                <div
+                    class="project-card institutional p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-mono text-purple-400 mb-3">
+                            <span>Institutional Tool</span>
+                            <span class="px-2 py-0.5 rounded bg-purple-500/10 border border-purple-500/20">Automated
+                                Audit</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">The Gender and Development MIS (GADMIS)</h4>
+                        <p class="text-sm text-slate-400 mb-4 leading-relaxed">
+                            Supports the implementation and monitoring of GAD initiatives across university departments,
+                            enabling budget submission, automatic computation, and cross-office data collection.
+                        </p>
+                    </div>
+                    <div
+                        class="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800/80 font-mono text-xs text-slate-300">
+                        <span class="px-2 py-1 rounded bg-slate-800">PHP</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">PostgreSQL</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">Chart.js</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">Nuxt.js</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">Laravel</span>
+                    </div>
+                </div>
+
+                <!-- 8. SIMS -->
+                <div
+                    class="project-card institutional p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-mono text-purple-400 mb-3">
+                            <span>Institutional Tool</span>
+                            <span
+                                class="px-2 py-0.5 rounded bg-purple-500/10 border border-purple-500/20">Operations</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">SIMS (Pest Control Management)</h4>
+                        <p class="text-sm text-slate-400 mb-4 leading-relaxed">
+                            A comprehensive pest control management system that streamlines scheduling, field tracking,
+                            chemical logs, and client service reporting.
+                        </p>
+                    </div>
+                    <div
+                        class="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800/80 font-mono text-xs text-slate-300">
+                        <span class="px-2 py-1 rounded bg-slate-800">PHP</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">React.js</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">MySQL</span>
+                    </div>
+                </div>
+
+                <!-- 9. CFNR Website -->
+                <div
+                    class="project-card cms p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-mono text-amber-400 mb-3">
+                            <span>Web Design &amp; CMS</span>
+                            <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">Official
+                                Portal</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">CFNR Website (College of Forestry)</h4>
+                        <p class="text-sm text-slate-400 mb-4 leading-relaxed">
+                            The official online portal for the UPLB College of Forestry and Natural Resources.
+                        </p>
+                    </div>
+                    <div
+                        class="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800/80 font-mono text-xs text-slate-300">
+                        <span class="px-2 py-1 rounded bg-slate-800">WordPress</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">Elementor</span>
+                    </div>
+                </div>
+
+                <!-- 10. UPLB GS Website -->
+                <div
+                    class="project-card cms p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-mono text-amber-400 mb-3">
+                            <span>Web Design &amp; CMS</span>
+                            <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">Institutional
+                                Hub</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-2">UPLB GS Website</h4>
+                        <p class="text-sm text-slate-400 mb-4 leading-relaxed">
+                            Official online presence for the UPLB Graduate School, serving as the primary resource for
+                            prospective students, research faculty, and alumni. Features include advanced content
+                            search, program specific pages, and integrated news feeds.
+                        </p>
+                    </div>
+                    <div
+                        class="flex flex-wrap gap-1.5 pt-4 border-t border-slate-800/80 font-mono text-xs text-slate-300">
+                        <span class="px-2 py-1 rounded bg-slate-800">WordPress</span>
+                        <span class="px-2 py-1 rounded bg-slate-800">Divi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Skills Section (Full 3-Column Original Stack) -->
+    <section id="skills" class="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+            <h2 class="text-xs uppercase font-mono tracking-widest text-emerald-400 mb-2">Technical Expertise</h2>
+            <h3 class="text-3xl font-bold text-white">Full-Stack Proficiency</h3>
+            <p class="text-slate-400 text-sm max-w-2xl mt-2">
+                A versatile MERN/LAMP stack background with deep specialization in cloud infrastructure and database
+                architecture.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Backend & Architecture -->
+            <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 rounded-lg bg-emerald-500/10 text-emerald-400">
+                        <i data-lucide="server" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white">Backend &amp; Architecture</h4>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">PHP (Laravel, CodeIgniter)</span>
+                            <span class="text-emerald-400 font-mono">95%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-emerald-500 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">Node.js (Express, NestJS)</span>
+                            <span class="text-emerald-400 font-mono">75%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-emerald-500 rounded-full" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">.NET Core / C#</span>
+                            <span class="text-emerald-400 font-mono">75%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-emerald-500 rounded-full" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">RESTful API Design</span>
+                            <span class="text-emerald-400 font-mono">95%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-emerald-500 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frontend Development -->
+            <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 rounded-lg bg-cyan-500/10 text-cyan-400">
+                        <i data-lucide="layout" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white">Frontend Development</h4>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">Vue.js / Nuxt.js</span>
+                            <span class="text-cyan-400 font-mono">90%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-cyan-500 rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">JavaScript / TypeScript</span>
+                            <span class="text-cyan-400 font-mono">95%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-cyan-500 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">React.js / Next.js</span>
+                            <span class="text-cyan-400 font-mono">75%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-cyan-500 rounded-full" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">Tailwind CSS &amp; Vuetify</span>
+                            <span class="text-cyan-400 font-mono">90%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-cyan-500 rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">WordPress (Elementor / Divi)</span>
+                            <span class="text-cyan-400 font-mono">85%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-cyan-500 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">Mobile (Capacitor 80% / Flutter 75%)</span>
+                            <span class="text-cyan-400 font-mono">80%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-cyan-500 rounded-full" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Database, Cloud & DevOps -->
+            <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 rounded-lg bg-emerald-500/10 text-emerald-400">
+                        <i data-lucide="database" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-white">Database, Cloud &amp; DevOps</h4>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">SQL (PostgreSQL, MariaDB, MySQL, MSSQL)</span>
+                            <span class="text-emerald-400 font-mono">95%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-emerald-500 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">AWS (EC2, S3, RDS)</span>
+                            <span class="text-emerald-400 font-mono">80%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-emerald-500 rounded-full" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">Automated Testing (Cypress, Jest)</span>
+                            <span class="text-emerald-400 font-mono">80%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-emerald-500 rounded-full" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">DevOps (CI/CD, Docker, Git)</span>
+                            <span class="text-emerald-400 font-mono">75%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-emerald-500 rounded-full" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 border-t border-slate-800/80 bg-slate-900/20 text-center">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-xs uppercase font-mono tracking-widest text-emerald-400 mb-2">Get In Touch</h2>
+            <h3 class="text-3xl font-bold text-white mb-4">Let's Build Something Impactful</h3>
+            <p class="text-slate-400 text-sm max-w-xl mx-auto mb-8">
+                I am open to new senior-level opportunities in system architecture, engineering leadership, and digital
+                transformation.
+            </p>
+
+            <div class="inline-flex flex-col sm:flex-row gap-4 items-center justify-center">
+                <a href="mailto:csnadabrera@gmail.com"
+                    class="px-6 py-3 rounded-xl bg-emerald-500 text-slate-950 font-bold hover:bg-emerald-400 transition-all flex items-center gap-2">
+                    <i data-lucide="mail" class="w-4 h-4"></i> Send a Message (csnadabrera@gmail.com)
                 </a>
-                <a href="#" class="text-slate-400 hover:text-accent transition-colors duration-200" aria-label="LinkedIn">
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 0-6-6h-2a6 6 0 0 0-6 6v7h4v-7a2 2 0 1 1 4 0v7h4v-7Z"/><path d="M4 22v-7"/><circle cx="4" cy="4" r="2"/></svg>
+                <a href="https://github.com/gsraabrera" target="_blank" rel="noopener noreferrer"
+                    class="px-6 py-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-all flex items-center gap-2">
+                    <i data-lucide="github" class="w-4 h-4"></i> GitHub Profile
                 </a>
             </div>
         </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-slate-800/80 text-center text-xs font-mono text-slate-500">
+        © 2026 Ronald A. Abrera. All rights reserved. · Senior Software Engineer Portfolio
     </footer>
 
-
+    <!-- Filter & Lucide Scripts -->
     <script>
-        // Mobile Menu Toggle
-        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-            const menu = document.getElementById('mobile-menu');
-            const menuIcon = document.getElementById('menu-icon');
-            const closeIcon = document.getElementById('close-icon');
-            
-            menu.classList.toggle('hidden');
-            menuIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
-        });
+        lucide.createIcons();
 
-        // Footer Year
-        document.getElementById('year').textContent = new Date().getFullYear();
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
 
-        // Project Filtering - FIXED LOGIC
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const projects = document.querySelectorAll('.project-card');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const filter = btn.getAttribute('data-filter');
-                
-                // 1. Update active button state (removes old styles, applies new ones)
-                filterBtns.forEach(b => {
-                    // Reset all buttons to inactive state
-                    b.classList.remove('bg-primary', 'text-white', 'shadow-md');
-                    b.classList.add('bg-white', 'text-slate-600', 'hover:bg-slate-200', 'border', 'border-slate-200');
-                });
-                
-                // Set clicked button to active state
-                btn.classList.remove('bg-white', 'text-slate-600', 'hover:bg-slate-200', 'border', 'border-slate-200');
-                btn.classList.add('bg-primary', 'text-white', 'shadow-md');
-
-                // 2. Filter projects
-                projects.forEach(project => {
-                    const projectCategory = project.getAttribute('data-category');
-                    
-                    if (filter === 'All' || projectCategory === filter) {
-                        // Show project (ensure it's using the correct display utility: flex)
-                        project.classList.remove('hidden');
-                        project.classList.add('flex', 'fade-in'); 
-                    } else {
-                        // Hide project
-                        project.classList.add('hidden');
-                        project.classList.remove('flex', 'fade-in');
-                    }
-                });
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-category') === category) {
+                    btn.className = "filter-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition-all";
+                } else {
+                    btn.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all";
+                }
             });
-        });
 
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
     </script>
-<script type="module" src="/index.tsx"></script>
 </body>
+
 </html>
