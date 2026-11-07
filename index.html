@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ronald Abrera | Senior Software Engineer & Tech Lead</title>
+    <meta name="description"
+        content="Portfolio of Ronald A. Abrera — Senior Software Engineer & Tech Lead specializing in large-scale institutional systems and Agentic AI workflows." />
+    <meta property="og:title" content="Ronald A. Abrera | Senior Full-Stack Engineer & Tech Lead" />
+    <meta property="og:description"
+        content="12+ years of engineering leadership, architecting systems serving 15,000+ active users." />
+    <meta property="og:url" content="https://gsraabrera.github.io/" />
+    <title>Ronald Abrera | Senior Full-Stack Engineer & Tech Lead</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -25,20 +31,38 @@
             }
         }
     </script>
+    <style>
+        .bg-grid-pattern {
+            background-size: 32px 32px;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        }
+    </style>
 </head>
 
-<body class="bg-slate-950 text-slate-100 antialiased selection:bg-emerald-500 selection:text-slate-950">
+<body
+    class="bg-slate-950 text-slate-100 antialiased selection:bg-emerald-500 selection:text-slate-950 overflow-x-hidden">
+
+    <!-- Ambient Glow Backgrounds -->
+    <div
+        class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-emerald-500/10 blur-[130px] rounded-full pointer-events-none -z-10">
+    </div>
+    <div
+        class="fixed top-1/3 right-[-100px] w-[500px] h-[500px] bg-cyan-500/10 blur-[140px] rounded-full pointer-events-none -z-10">
+    </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 inset-x-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
+    <nav class="fixed top-0 inset-x-0 z-50 bg-slate-950/85 backdrop-blur-md border-b border-slate-800/80">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <a href="#" class="font-mono text-lg font-bold tracking-tight text-white flex items-center gap-2">
+            <a href="#" class="font-mono text-base font-bold tracking-tight text-white flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 ronald.dev
             </a>
-            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
-                <a href="#summary" class="hover:text-emerald-400 transition-colors">Summary</a>
-                <a href="#methodology" class="hover:text-emerald-400 transition-colors">How I Work</a>
+            <div
+                class="hidden md:flex items-center space-x-8 text-xs uppercase tracking-wider font-mono text-slate-400">
+                <a href="#summary" class="hover:text-emerald-400 transition-colors">Overview</a>
+                <a href="#methodology" class="hover:text-emerald-400 transition-colors">Methodology</a>
                 <a href="#projects" class="hover:text-emerald-400 transition-colors">Projects</a>
                 <a href="#skills" class="hover:text-emerald-400 transition-colors">Skills</a>
                 <a href="#contact" class="hover:text-emerald-400 transition-colors">Contact</a>
@@ -46,171 +70,263 @@
             <div class="flex items-center gap-3">
                 <a href="https://github.com/gsraabrera" target="_blank" rel="noopener noreferrer"
                     class="p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white transition-all"
-                    title="GitHub">
+                    title="GitHub Profile">
                     <i data-lucide="github" class="w-4 h-4"></i>
                 </a>
                 <a href="mailto:csnadabrera@gmail.com"
-                    class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-all">
-                    Get in Touch
+                    class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-all font-mono">
+                    Contact Me
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero / Summary Section -->
-    <section id="summary" class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-        <div
-            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono uppercase tracking-wider mb-6">
-            <i data-lucide="terminal" class="w-3.5 h-3.5"></i> Senior Software Engineer &amp; Tech Lead
-        </div>
-        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6">
-            Developing Scalable <br class="hidden sm:inline" />
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">Institutional
-                Systems</span>
-        </h1>
-        <p class="text-lg text-slate-400 max-w-3xl leading-relaxed mb-10">
-            A results-oriented Senior Software Engineer with over 10 years of experience managing the full Software
-            Development Lifecycle (SDLC). Specialized in architecting and deploying large-scale, mission-critical
-            administrative and educational systems. Experienced in agile environments, mentoring development teams, and
-            driving efficiency through strategic digital solutions.
-        </p>
+    <!-- Hero Section with Dual-Column Terminal -->
+    <section id="summary" class="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto bg-grid-pattern">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-        <!-- Key Highlights / Metrics -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
-                <div class="text-3xl font-extrabold text-emerald-400 mb-1">15,000+</div>
+            <!-- Left Column: Bio & Core Title -->
+            <div class="lg:col-span-7">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono uppercase tracking-wider mb-6">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    Senior ICT Associate &amp; Tech Lead
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-6 leading-tight">
+                    Engineering High-Scale <br />
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">Institutional
+                        Systems</span>
+                </h1>
+                <p class="text-base sm:text-lg text-slate-400 leading-relaxed mb-8">
+                    Over 12 years of software engineering leadership managing end-to-end SDLC. Proven experience
+                    architecting large-scale public and academic infrastructure, driving Agile velocity, and integrating
+                    modern <strong>Agentic AI workflows</strong> to eliminate operational bottlenecks.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-wrap gap-4 items-center mb-10">
+                    <a href="#projects"
+                        class="px-5 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-bold hover:bg-emerald-400 transition-all text-sm flex items-center gap-2">
+                        Explore Systems <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                    </a>
+                    <a href="https://github.com/gsraabrera" target="_blank" rel="noopener noreferrer"
+                        class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-all text-sm flex items-center gap-2">
+                        <i data-lucide="github" class="w-4 h-4"></i> GitHub Repositories
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive System Terminal -->
+            <div class="lg:col-span-5">
+                <div
+                    class="rounded-2xl bg-slate-900/90 border border-slate-800 shadow-2xl overflow-hidden backdrop-blur-xl">
+                    <!-- Terminal Header -->
+                    <div class="px-4 py-3 bg-slate-950/70 border-b border-slate-800 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                        </div>
+                        <div class="text-[11px] font-mono text-slate-500">ronald@uplb-core-terminal ~ </div>
+                    </div>
+                    <!-- Terminal Body -->
+                    <div class="p-5 font-mono text-xs space-y-3 leading-relaxed text-slate-300">
+                        <div>
+                            <span class="text-emerald-400">$</span> <span class="text-slate-100">systemctl status
+                                engineering-profile</span>
+                        </div>
+                        <div class="text-slate-400 pl-4 border-l-2 border-slate-800 space-y-1">
+                            <div><span class="text-slate-500">Status:</span> <span
+                                    class="text-emerald-400 font-semibold">Active (High-Availability Lead)</span></div>
+                            <div><span class="text-slate-500">Experience:</span> 12+ Years (SDLC &amp; Architecture)
+                            </div>
+                            <div><span class="text-slate-500">Core_Stack:</span> Laravel, Nuxt.js, PostgreSQL, Node.js
+                            </div>
+                            <div><span class="text-slate-500">Emerging:</span> Agentic AI &amp; Tool Orchestration</div>
+                        </div>
+                        <div>
+                            <span class="text-emerald-400">$</span> <span class="text-slate-100">cat
+                                /etc/flagship-metrics.json</span>
+                        </div>
+                        <div class="text-slate-400 pl-4 border-l-2 border-slate-800 space-y-1">
+                            <div>{</div>
+                            <div class="pl-3">"amis_users": <span class="text-cyan-400">"15,000+ active"</span>,</div>
+                            <div class="pl-3">"odss_throughput": <span class="text-cyan-400">"20,000+ docs/yr"</span>,
+                            </div>
+                            <div class="pl-3">"legacy_migration": <span class="text-cyan-400">"5+ years
+                                    converted"</span></div>
+                            <div>}</div>
+                        </div>
+                        <div class="pt-2 flex items-center gap-1.5 text-emerald-400 animate-pulse">
+                            <span>$</span> <span class="inline-block w-2 h-4 bg-emerald-400"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Metrics Ribbon -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16">
+            <div
+                class="p-5 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-emerald-500/30 transition-all backdrop-blur-sm">
+                <div
+                    class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 mb-1">
+                    15,000+</div>
                 <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">Active AMIS Users</div>
             </div>
-            <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
-                <div class="text-3xl font-extrabold text-cyan-400 mb-1">20,000+</div>
-                <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">ODSS Submissions / Year</div>
+            <div
+                class="p-5 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-cyan-500/30 transition-all backdrop-blur-sm">
+                <div
+                    class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 mb-1">
+                    20,000+</div>
+                <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">ODSS Submissions / Yr</div>
             </div>
-            <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
-                <div class="text-3xl font-extrabold text-emerald-400 mb-1">10+ Years</div>
-                <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">In Software Engineering</div>
+            <div
+                class="p-5 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-emerald-500/30 transition-all backdrop-blur-sm">
+                <div
+                    class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 mb-1">
+                    12+ Years</div>
+                <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">Engineering SDLC</div>
             </div>
-            <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
-                <div class="text-3xl font-extrabold text-cyan-400 mb-1">5+ Years</div>
+            <div
+                class="p-5 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-cyan-500/30 transition-all backdrop-blur-sm">
+                <div
+                    class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 mb-1">
+                    5+ Years</div>
                 <div class="text-xs text-slate-400 uppercase tracking-wider font-mono">Legacy Data Migrated</div>
             </div>
         </div>
     </section>
 
-    <!-- HOW I WORK / METHODOLOGY SECTION -->
-    <section id="methodology" class="py-20 border-t border-slate-800/80 bg-slate-900/40">
+    <!-- HOW I WORK & ENGINEERING METHODOLOGY -->
+    <section id="methodology" class="py-20 border-t border-slate-800/80 bg-slate-900/30">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-12">
-                <h2 class="text-xs uppercase font-mono tracking-widest text-emerald-400 mb-2">Engineering Practices</h2>
-                <h3 class="text-3xl font-bold text-white">How I Work &amp; Lead Teams</h3>
+            <div class="mb-14">
+                <div
+                    class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2">
+                    <i data-lucide="cpu" class="w-3.5 h-3.5"></i> Execution Framework
+                </div>
+                <h3 class="text-3xl font-bold text-white">How I Build &amp; Lead Systems</h3>
                 <p class="text-slate-400 text-sm max-w-2xl mt-2">
-                    Bridging technical architecture with institutional needs through disciplined workflows, continuous
-                    mentorship, and reliable engineering standards.
+                    Combining battle-tested software engineering discipline with modern automation and Agentic AI
+                    workflows to deliver resilient, scalable platforms.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Pillar 1 -->
+                <!-- Card 1 -->
                 <div
-                    class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-emerald-500/40 transition-all">
+                    class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-emerald-500/40 hover:-translate-y-1 transition-all duration-300">
                     <div
-                        class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mb-4">
+                        class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mb-5">
                         <i data-lucide="layers" class="w-5 h-5"></i>
                     </div>
-                    <h4 class="text-lg font-bold text-white mb-2">Architecture &amp; SDLC</h4>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Executing end-to-end SDLC from requirements analysis to containerized CI/CD deployment,
-                        prioritizing high availability, database indexing, and modular clean architectures.
+                    <div class="text-xs font-mono text-emerald-400 mb-1">STAGE 01</div>
+                    <h4 class="text-lg font-bold text-white mb-2">Architecture &amp; Design</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Designing resilient database schemas, modular service boundaries, and role-based access controls
+                        to guarantee data integrity across high-traffic operations.
                     </p>
                 </div>
 
-                <!-- Pillar 2 -->
+                <!-- Card 2 -->
                 <div
-                    class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-cyan-500/40 transition-all">
+                    class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-cyan-500/40 hover:-translate-y-1 transition-all duration-300">
                     <div
-                        class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center mb-4">
-                        <i data-lucide="check-circle" class="w-5 h-5"></i>
+                        class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center mb-5">
+                        <i data-lucide="bot" class="w-5 h-5"></i>
                     </div>
-                    <h4 class="text-lg font-bold text-white mb-2">Code Quality &amp; QA</h4>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Establishing strict linting, systematic peer code reviews, and automated testing routines
-                        (Cypress, Jest) to squash regressions early and eliminate technical debt.
+                    <div class="text-xs font-mono text-cyan-400 mb-1">STAGE 02</div>
+                    <h4 class="text-lg font-bold text-white mb-2">Agentic AI &amp; Prototyping</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Deploying autonomous tool-calling agents and LLM API pipelines to accelerate boilerplate
+                        development, automate data parsing, and build smart internal workflows.
                     </p>
                 </div>
 
-                <!-- Pillar 3 -->
+                <!-- Card 3 -->
                 <div
-                    class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-purple-500/40 transition-all">
+                    class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300">
                     <div
-                        class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center mb-4">
+                        class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center mb-5">
+                        <i data-lucide="shield-check" class="w-5 h-5"></i>
+                    </div>
+                    <div class="text-xs font-mono text-purple-400 mb-1">STAGE 03</div>
+                    <h4 class="text-lg font-bold text-white mb-2">Rigorous QA &amp; Testing</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Implementing automated regression testing (Cypress, Jest), peer code review gates, and strict
+                        CI/CD pipelines to ensure zero-downtime releases.
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div
+                    class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-amber-500/40 hover:-translate-y-1 transition-all duration-300">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mb-5">
                         <i data-lucide="users" class="w-5 h-5"></i>
                     </div>
-                    <h4 class="text-lg font-bold text-white mb-2">Team Mentorship</h4>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Mentoring junior developers through pair programming and clear documentation. Unblocking
-                        technical roadblocks to maintain high sprint velocity across Scrum and Kanban cycles.
-                    </p>
-                </div>
-
-                <!-- Pillar 4 -->
-                <div
-                    class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-amber-500/40 transition-all">
-                    <div
-                        class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mb-4">
-                        <i data-lucide="compass" class="w-5 h-5"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-white mb-2">Stakeholder Alignment</h4>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Translating high-level administrative governance, academic guidelines, and user demands into
-                        realistic, high-impact engineering milestones.
+                    <div class="text-xs font-mono text-amber-400 mb-1">STAGE 04</div>
+                    <h4 class="text-lg font-bold text-white mb-2">Mentorship &amp; Velocity</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Running Agile Scrum/Kanban cycles, unblocking developers, and translating stakeholder governance
+                        policies into unambiguous engineering milestones.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section (All 10 Projects) -->
-    <section id="projects" class="py-20 border-t border-slate-800/80 bg-slate-900/20">
+    <!-- Projects Section (All 10 Flagship Systems with Visual Tags) -->
+    <section id="projects" class="py-20 border-t border-slate-800/80">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
                 <div>
-                    <h2 class="text-xs uppercase font-mono tracking-widest text-emerald-400 mb-2">Portfolio</h2>
-                    <h3 class="text-3xl font-bold text-white">Selected Works</h3>
+                    <div
+                        class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2">
+                        <i data-lucide="code" class="w-3.5 h-3.5"></i> Production Portfolio
+                    </div>
+                    <h3 class="text-3xl font-bold text-white">Selected Institutional Works</h3>
                 </div>
-                <!-- Category Filter Tabs -->
+                <!-- Filter Tabs -->
                 <div class="flex flex-wrap gap-2 mt-4 md:mt-0" id="filter-container">
                     <button onclick="filterProjects('all')"
-                        class="filter-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition-all"
-                        data-category="all">All</button>
+                        class="filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition-all font-mono"
+                        data-category="all">All (10)</button>
                     <button onclick="filterProjects('academic')"
-                        class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all"
+                        class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all font-mono"
                         data-category="academic">Academic &amp; Admin</button>
                     <button onclick="filterProjects('workflow')"
-                        class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all"
+                        class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all font-mono"
                         data-category="workflow">Digital Workflows</button>
                     <button onclick="filterProjects('institutional')"
-                        class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all"
+                        class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all font-mono"
                         data-category="institutional">Institutional Tools</button>
                     <button onclick="filterProjects('cms')"
-                        class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all"
+                        class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all font-mono"
                         data-category="cms">Web &amp; CMS</button>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="projects-grid">
+
                 <!-- 1. AMIS -->
                 <div
-                    class="project-card academic p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    class="project-card academic p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-emerald-500/50 flex flex-col justify-between transition-all duration-300">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-emerald-400 mb-3">
-                            <span>Academic/Administrative</span>
-                            <span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">15,000+
-                                Users</span>
+                            <span>Academic / Administrative</span>
+                            <span
+                                class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 font-semibold">15,000+
+                                Active Users</span>
                         </div>
                         <h4 class="text-xl font-bold text-white mb-2">Academic Management Information System (AMIS)</h4>
                         <p class="text-sm text-slate-400 mb-4 leading-relaxed">
-                            A comprehensive system managing student records, enrollment, and grading for university-wide
-                            operations. <strong>Successfully migrated 5+ years of legacy data, supporting over 15,000
-                                active users.</strong>
+                            University-wide platform managing student records, enrollment, and grading.
+                            <strong>Successfully migrated 5+ years of legacy records</strong> and established
+                            high-availability database pipelines.
                         </p>
                     </div>
                     <div
@@ -224,18 +340,18 @@
 
                 <!-- 2. Online Graduate School Database System -->
                 <div
-                    class="project-card academic p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    class="project-card academic p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-emerald-500/50 flex flex-col justify-between transition-all duration-300">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-emerald-400 mb-3">
-                            <span>Academic/Administrative</span>
-                            <span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">Data
-                                Centralization</span>
+                            <span>Academic / Administrative</span>
+                            <span
+                                class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">Centralized
+                                DB</span>
                         </div>
                         <h4 class="text-xl font-bold text-white mb-2">Online Graduate School Database System</h4>
                         <p class="text-sm text-slate-400 mb-4 leading-relaxed">
-                            Centralized database for tracking graduate student progress, thesis monitoring, and faculty
-                            advisement. <strong>Standardized the academic evaluation process, reducing manual data entry
-                                errors.</strong>
+                            Centralized database tracking graduate student progress, thesis monitoring, and faculty
+                            advisement. Standardized academic evaluations and eradicated manual data entry errors.
                         </p>
                     </div>
                     <div
@@ -248,18 +364,18 @@
 
                 <!-- 3. Faculty Merit Promotion System -->
                 <div
-                    class="project-card academic p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    class="project-card academic p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-emerald-500/50 flex flex-col justify-between transition-all duration-300">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-emerald-400 mb-3">
-                            <span>Academic/Administrative</span>
-                            <span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">Evaluation
+                            <span>Academic / Administrative</span>
+                            <span
+                                class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-300">Evaluation
                                 Engine</span>
                         </div>
                         <h4 class="text-xl font-bold text-white mb-2">Faculty Merit Promotion System</h4>
                         <p class="text-sm text-slate-400 mb-4 leading-relaxed">
-                            Automated evaluation platform for faculty performance metrics, streamlining promotion cycles
-                            and transparency. <strong>Reduced the administrative turnaround time for promotion
-                                applications.</strong>
+                            Automated evaluation engine for university faculty performance metrics, streamlining
+                            promotion cycles and providing clear audit trails.
                         </p>
                     </div>
                     <div
@@ -273,18 +389,19 @@
 
                 <!-- 4. ODSS -->
                 <div
-                    class="project-card workflow p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    class="project-card workflow p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-cyan-500/50 flex flex-col justify-between transition-all duration-300">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-cyan-400 mb-3">
                             <span>Digital Workflow</span>
-                            <span class="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">20,000+
-                                Submissions</span>
+                            <span
+                                class="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 font-semibold">20,000+
+                                Docs / Yr</span>
                         </div>
                         <h4 class="text-xl font-bold text-white mb-2">Online Document Submission System (ODSS)</h4>
                         <p class="text-sm text-slate-400 mb-4 leading-relaxed">
-                            A user-friendly platform for seamless submission and real-time tracking of documents by
-                            students and other stakeholders. <strong>Processed over 20,000 document submissions in its
-                                first year of deployment.</strong>
+                            A user-friendly platform for seamless submission and real-time document routing.
+                            <strong>Processed over 20,000 submissions in year one</strong>, migrating the department to
+                            paperless tracking.
                         </p>
                     </div>
                     <div
@@ -297,17 +414,18 @@
 
                 <!-- 5. Virtual LogBook -->
                 <div
-                    class="project-card workflow p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    class="project-card workflow p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-cyan-500/50 flex flex-col justify-between transition-all duration-300">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-cyan-400 mb-3">
                             <span>Digital Workflow</span>
-                            <span class="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">Staff
-                                Tracking</span>
+                            <span
+                                class="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">Staff
+                                Reporting</span>
                         </div>
                         <h4 class="text-xl font-bold text-white mb-2">Virtual LogBook</h4>
                         <p class="text-sm text-slate-400 mb-4 leading-relaxed">
-                            Facilitates internal tracking of documents, records actions taken, generates staff
-                            performance reports (IPCR), and provides automated email notifications.
+                            Internal audit trail facilitating real-time document status, automated staff IPCR
+                            performance report generation, and immediate email alert dispatches.
                         </p>
                     </div>
                     <div
@@ -320,18 +438,18 @@
 
                 <!-- 6. Online Application for Graduation -->
                 <div
-                    class="project-card workflow p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    class="project-card workflow p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-cyan-500/50 flex flex-col justify-between transition-all duration-300">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-cyan-400 mb-3">
                             <span>Digital Workflow</span>
-                            <span class="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">Paperless
-                                Clearance</span>
+                            <span
+                                class="px-2 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20 text-cyan-300">Clearance
+                                Engine</span>
                         </div>
-                        <h4 class="text-xl font-bold text-white mb-2">Graduate School Online Application for Graduation
-                        </h4>
+                        <h4 class="text-xl font-bold text-white mb-2">Online Application for Graduation</h4>
                         <p class="text-sm text-slate-400 mb-4 leading-relaxed">
-                            Streamlines the complex process for graduate students applying for graduation, allowing
-                            real-time status tracking, automated requirement checks, and eliminating paper forms.
+                            Automated graduation application workflows for graduate students, validating academic
+                            prerequisites, committee clearances, and multi-office sign-offs.
                         </p>
                     </div>
                     <div
@@ -344,17 +462,18 @@
 
                 <!-- 7. GADMIS -->
                 <div
-                    class="project-card institutional p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    class="project-card institutional p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-purple-500/50 flex flex-col justify-between transition-all duration-300">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-purple-400 mb-3">
                             <span>Institutional Tool</span>
-                            <span class="px-2 py-0.5 rounded bg-purple-500/10 border border-purple-500/20">Automated
-                                Audit</span>
+                            <span
+                                class="px-2 py-0.5 rounded bg-purple-500/10 border border-purple-500/20 text-purple-300">Budget
+                                Analytics</span>
                         </div>
-                        <h4 class="text-xl font-bold text-white mb-2">The Gender and Development MIS (GADMIS)</h4>
+                        <h4 class="text-xl font-bold text-white mb-2">Gender &amp; Development MIS (GADMIS)</h4>
                         <p class="text-sm text-slate-400 mb-4 leading-relaxed">
-                            Supports the implementation and monitoring of GAD initiatives across university departments,
-                            enabling budget submission, automatic computation, and cross-office data collection.
+                            Institutional budget submission and compliance tracking platform featuring automated
+                            financial calculations and cross-departmental analytics reports.
                         </p>
                     </div>
                     <div
@@ -369,17 +488,18 @@
 
                 <!-- 8. SIMS -->
                 <div
-                    class="project-card institutional p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    class="project-card institutional p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-purple-500/50 flex flex-col justify-between transition-all duration-300">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-purple-400 mb-3">
                             <span>Institutional Tool</span>
                             <span
-                                class="px-2 py-0.5 rounded bg-purple-500/10 border border-purple-500/20">Operations</span>
+                                class="px-2 py-0.5 rounded bg-purple-500/10 border border-purple-500/20 text-purple-300">Operational
+                                MIS</span>
                         </div>
                         <h4 class="text-xl font-bold text-white mb-2">SIMS (Pest Control Management)</h4>
                         <p class="text-sm text-slate-400 mb-4 leading-relaxed">
-                            A comprehensive pest control management system that streamlines scheduling, field tracking,
-                            chemical logs, and client service reporting.
+                            Operational enterprise system for scheduling service appointments, tracking chemical
+                            inventory levels, and generating automated client service logs.
                         </p>
                     </div>
                     <div
@@ -392,16 +512,17 @@
 
                 <!-- 9. CFNR Website -->
                 <div
-                    class="project-card cms p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    class="project-card cms p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-amber-500/50 flex flex-col justify-between transition-all duration-300">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-amber-400 mb-3">
                             <span>Web Design &amp; CMS</span>
-                            <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">Official
+                            <span
+                                class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-amber-300">Official
                                 Portal</span>
                         </div>
                         <h4 class="text-xl font-bold text-white mb-2">CFNR Website (College of Forestry)</h4>
                         <p class="text-sm text-slate-400 mb-4 leading-relaxed">
-                            The official online portal for the UPLB College of Forestry and Natural Resources.
+                            The official online web portal for the UPLB College of Forestry and Natural Resources.
                         </p>
                     </div>
                     <div
@@ -413,18 +534,18 @@
 
                 <!-- 10. UPLB GS Website -->
                 <div
-                    class="project-card cms p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between hover:border-slate-700 transition-all">
+                    class="project-card cms p-6 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-amber-500/50 flex flex-col justify-between transition-all duration-300">
                     <div>
                         <div class="flex items-center justify-between text-xs font-mono text-amber-400 mb-3">
                             <span>Web Design &amp; CMS</span>
-                            <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20">Institutional
+                            <span
+                                class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-amber-300">Institutional
                                 Hub</span>
                         </div>
                         <h4 class="text-xl font-bold text-white mb-2">UPLB GS Website</h4>
                         <p class="text-sm text-slate-400 mb-4 leading-relaxed">
-                            Official online presence for the UPLB Graduate School, serving as the primary resource for
-                            prospective students, research faculty, and alumni. Features include advanced content
-                            search, program specific pages, and integrated news feeds.
+                            Official institutional portal for the UPLB Graduate School with customized program discovery
+                            filters, announcement feeds, and academic guidelines.
                         </p>
                     </div>
                     <div
@@ -433,24 +554,29 @@
                         <span class="px-2 py-1 rounded bg-slate-800">Divi</span>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Technical Skills Section (Full 3-Column Original Stack) -->
-    <section id="skills" class="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Technical Skills & Stack (Including AI & Automation) -->
+    <section id="skills" class="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800/80">
         <div class="mb-12">
-            <h2 class="text-xs uppercase font-mono tracking-widest text-emerald-400 mb-2">Technical Expertise</h2>
-            <h3 class="text-3xl font-bold text-white">Full-Stack Proficiency</h3>
+            <div
+                class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2">
+                <i data-lucide="sliders" class="w-3.5 h-3.5"></i> Comprehensive Stack
+            </div>
+            <h3 class="text-3xl font-bold text-white">Technical Expertise &amp; Tooling</h3>
             <p class="text-slate-400 text-sm max-w-2xl mt-2">
-                A versatile MERN/LAMP stack background with deep specialization in cloud infrastructure and database
-                architecture.
+                A balanced MERN/LAMP stack background with modern specialization in cloud infrastructure, relational
+                database optimization, and Agentic AI tools.
             </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
             <!-- Backend & Architecture -->
-            <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+            <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800">
                 <div class="flex items-center gap-3 mb-6">
                     <div class="p-2.5 rounded-lg bg-emerald-500/10 text-emerald-400">
                         <i data-lucide="server" class="w-5 h-5"></i>
@@ -461,6 +587,15 @@
                     <div>
                         <div class="flex justify-between text-xs font-medium mb-1.5">
                             <span class="text-slate-300">PHP (Laravel, CodeIgniter)</span>
+                            <span class="text-emerald-400 font-mono">95%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-emerald-500 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">RESTful API Design</span>
                             <span class="text-emerald-400 font-mono">95%</span>
                         </div>
                         <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
@@ -485,25 +620,16 @@
                             <div class="h-full bg-emerald-500 rounded-full" style="width: 75%"></div>
                         </div>
                     </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-medium mb-1.5">
-                            <span class="text-slate-300">RESTful API Design</span>
-                            <span class="text-emerald-400 font-mono">95%</span>
-                        </div>
-                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
-                            <div class="h-full bg-emerald-500 rounded-full" style="width: 95%"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <!-- Frontend Development -->
-            <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+            <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800">
                 <div class="flex items-center gap-3 mb-6">
                     <div class="p-2.5 rounded-lg bg-cyan-500/10 text-cyan-400">
                         <i data-lucide="layout" class="w-5 h-5"></i>
                     </div>
-                    <h4 class="text-lg font-bold text-white">Frontend Development</h4>
+                    <h4 class="text-lg font-bold text-white">Frontend &amp; UI Systems</h4>
                 </div>
                 <div class="space-y-4">
                     <div>
@@ -563,13 +689,13 @@
                 </div>
             </div>
 
-            <!-- Database, Cloud & DevOps -->
-            <div class="p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+            <!-- Database, Cloud & AI Automation -->
+            <div class="p-6 rounded-2xl bg-slate-900/70 border border-slate-800">
                 <div class="flex items-center gap-3 mb-6">
                     <div class="p-2.5 rounded-lg bg-emerald-500/10 text-emerald-400">
                         <i data-lucide="database" class="w-5 h-5"></i>
                     </div>
-                    <h4 class="text-lg font-bold text-white">Database, Cloud &amp; DevOps</h4>
+                    <h4 class="text-lg font-bold text-white">Database, Cloud &amp; AI</h4>
                 </div>
                 <div class="space-y-4">
                     <div>
@@ -592,6 +718,15 @@
                     </div>
                     <div>
                         <div class="flex justify-between text-xs font-medium mb-1.5">
+                            <span class="text-slate-300">Agentic AI &amp; Tool Orchestration</span>
+                            <span class="text-emerald-400 font-mono">85%</span>
+                        </div>
+                        <div class="h-2 rounded-full bg-slate-800 overflow-hidden">
+                            <div class="h-full bg-emerald-500 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-medium mb-1.5">
                             <span class="text-slate-300">Automated Testing (Cypress, Jest)</span>
                             <span class="text-emerald-400 font-mono">80%</span>
                         </div>
@@ -610,27 +745,32 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 border-t border-slate-800/80 bg-slate-900/20 text-center">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-xs uppercase font-mono tracking-widest text-emerald-400 mb-2">Get In Touch</h2>
-            <h3 class="text-3xl font-bold text-white mb-4">Let's Build Something Impactful</h3>
+    <section id="contact"
+        class="py-24 border-t border-slate-800/80 bg-slate-900/30 text-center relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div
+                class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-widest text-emerald-400 mb-2">
+                <i data-lucide="mail" class="w-3.5 h-3.5"></i> Get In Touch
+            </div>
+            <h3 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Let's Build Something Impactful</h3>
             <p class="text-slate-400 text-sm max-w-xl mx-auto mb-8">
-                I am open to new senior-level opportunities in system architecture, engineering leadership, and digital
-                transformation.
+                Open to senior-level engineering leadership, system architecture, and high-impact digital transformation
+                opportunities.
             </p>
 
             <div class="inline-flex flex-col sm:flex-row gap-4 items-center justify-center">
                 <a href="mailto:csnadabrera@gmail.com"
-                    class="px-6 py-3 rounded-xl bg-emerald-500 text-slate-950 font-bold hover:bg-emerald-400 transition-all flex items-center gap-2">
-                    <i data-lucide="mail" class="w-4 h-4"></i> Send a Message (csnadabrera@gmail.com)
+                    class="px-6 py-3.5 rounded-xl bg-emerald-500 text-slate-950 font-bold hover:bg-emerald-400 transition-all flex items-center gap-2 font-mono text-sm">
+                    <i data-lucide="send" class="w-4 h-4"></i> csnadabrera@gmail.com
                 </a>
                 <a href="https://github.com/gsraabrera" target="_blank" rel="noopener noreferrer"
-                    class="px-6 py-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-all flex items-center gap-2">
-                    <i data-lucide="github" class="w-4 h-4"></i> GitHub Profile
+                    class="px-6 py-3.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-all flex items-center gap-2 font-mono text-sm">
+                    <i data-lucide="github" class="w-4 h-4"></i> github.com/gsraabrera
                 </a>
             </div>
         </div>
@@ -641,7 +781,7 @@
         © 2026 Ronald A. Abrera. All rights reserved. · Senior Software Engineer Portfolio
     </footer>
 
-    <!-- Filter & Lucide Scripts -->
+    <!-- Script for Icons and Project Filtering -->
     <script>
         lucide.createIcons();
 
@@ -651,9 +791,9 @@
 
             buttons.forEach(btn => {
                 if (btn.getAttribute('data-category') === category) {
-                    btn.className = "filter-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition-all";
+                    btn.className = "filter-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 text-slate-950 transition-all font-mono";
                 } else {
-                    btn.className = "filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all";
+                    btn.className = "filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all font-mono";
                 }
             });
 
